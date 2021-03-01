@@ -9,17 +9,15 @@ const AnswersList = (props) => {
   // }
   const answerValues = Object.values(props.answer);
   return (
-    <div className='answer-list'>
+    <div className="answer-list">
       <div>
-        {answerValues.map((answer, idx) => 
-          <AnswerEntry key={answer + idx} answer={answer}/> 
-        )}
-        </div>
-      <form className='load-answers'> 
+        {answerValues.map((answer) => <AnswerEntry key={answer} answer={answer} />)}
+      </div>
+      <form className="load-answers"> 
         <input type="submit" value="Load More Answers" />
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default AnswersList;

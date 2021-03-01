@@ -168,6 +168,29 @@ body {
 
 /* ------------------------- Questions and Answers Module -----------------------------*/
 
+.search-bar {
+  position: relative;
+  display: flex;
+  min-width: 100px;
+}
+
+.search {
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 25px;
+  width: 100%;
+  padding: 2px 30px 2px 5px;
+  outline: 0;
+  background-color: whitesmoke;
+}
+
+.search-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 14px;
+}
+
 
 
 
