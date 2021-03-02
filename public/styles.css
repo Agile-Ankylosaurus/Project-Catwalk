@@ -191,6 +191,22 @@ body {
   width: 14px;
 }
 
+.question {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.question-helpful {
+  float: right;
+}
+
+.answer-img {
+  max-height: 100px;
+  max-width: 100px;
+  height: auto;
+  width: auto;
+}
+
 
 
 
