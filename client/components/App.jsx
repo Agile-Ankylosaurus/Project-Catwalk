@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import RatingsApp from './ratings/RatingsApp.jsx';
-import QuestionsList from './Questions/QuestionsList.jsx';
-import ProductDetailsView from './productDetails/ProductDetailsView.jsx';
-import ProductDescription from './productDetails/ProductDescription.jsx';
+import RatingsApp from './ratings/RatingsApp';
+import QuestionsList from './Questions/QuestionsList';
+import ProductDetailsView from './productDetails/ProductDetailsView';
+import ProductDescription from './productDetails/ProductDescription';
 
 const axios = require('axios');
 const TOKEN = require('../../config.js');
@@ -22,18 +22,22 @@ const App = (props) => {
   ]);
   const [selectedStyle, setSelectedStyle] = useState(0);
   const [meta, setMeta] = useState({
-    "ratings": {},
-    "recommended": {
-      "false": "0",
-      "true": "0"
+    ratings: {},
+    recommended: {
+      false: '0',
+      true: '0',
     },
-    "characteristics": {}
-    });
+    characteristics: {},
+  });
   const [reviews, setReviews] = useState([]);
 
   const getOneProduct = () => {
-    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/'
-    //get the default product to populate the page on start up
+    // this url tests for 4+ styles and items on sale
+    // const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20118';
+    // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
+    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
+
+    // get the default product to populate the page on start up
     axios.get(`${url}products`, {
       headers: {
         Authorization: TOKEN,
@@ -61,9 +65,9 @@ const App = (props) => {
               },
             })
               .then((ratingMeta) => {
-                //console.log(ratingMeta.data);
-                let metaData = ratingMeta.data;
-                let totalReviews = Number.parseInt(metaData.recommended.false)
+                // console.log(ratingMeta.data);
+                const metaData = ratingMeta.data;
+                const totalReviews = Number.parseInt(metaData.recommended.false)
                                  + Number.parseInt(metaData.recommended.true);
                 setMeta(metaData);
                 // get all reviews for the default product id
@@ -119,7 +123,7 @@ const App = (props) => {
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <div id="reviews-ratings">
-          <RatingsApp metaData={meta} reviews={reviews}/>
+          <RatingsApp metaData={meta} reviews={reviews} />
         </div>
         <div className="gridSpacer" />
       </div>

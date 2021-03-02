@@ -8,6 +8,10 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'public'),
   },
+  resolve: {
+    // enforceExtension: false,
+    extensions: ['.jsx', '.js', '.json'],
+  },
   module: {
     rules: [
       {
