@@ -32,8 +32,9 @@ const Breakdown = ({ metaData }) => {
       results.characteristics[key] = dataObj.characteristics[key].value
     }
     return results;
-  };
-  const goodData = transformData(metaData);
+  }
+  // console.log(props);
+  var goodData = transformData(props.metaData);
 
   return (
     <div>

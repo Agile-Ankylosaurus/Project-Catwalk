@@ -30,6 +30,7 @@ const App = () => {
     characteristics: {},
   });
   const [reviews, setReviews] = useState([]);
+  const [questions, setQuestions] = useState([]);
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
@@ -76,8 +77,20 @@ const App = () => {
                     Authorization: TOKEN,
                   },
                 })
-                  .then((allReviews) => {
-                    setReviews(allReviews.data.results);
+                  .then((reviews) => {
+                    setReviews(reviews.data.results);
+                    // get questions for q&a
+                    axios.get(`${url}qa/questions/?product_id=${productRes.data[0].id}`, {
+                      headers: {
+                        Authorization: TOKEN,
+                      },
+                    })
+                      .then((question) => {
+                        setQuestions(question.data.results);
+                      })
+                      .catch((err) => {
+                        console.log('error getting questions', err);
+                      });
                   })
                   .catch((err) => {
                     console.log('error getting reviews', err);
@@ -118,7 +131,7 @@ const App = () => {
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <div id="questions-answers">
-          <QuestionsList />
+          <QuestionsList questions={questions} />
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />

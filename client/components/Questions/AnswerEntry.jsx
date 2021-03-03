@@ -17,10 +17,6 @@ const AnswerEntry = (props) => {
   const handleReportClick = () => {
     setReport(report === 'Report' ? 'Reported' : 'Reported');
   };
-  // props.answer.photos.forEach((photo) =>
-  //   console.log(photo),
-  //   <img src={photo.photos} alt="" />
-  // )
 
   return (
     <div className="answer-entry">
@@ -36,15 +32,18 @@ const AnswerEntry = (props) => {
         <span onClick={() => setCount(count + 1)}>
           Yes
         </span>
-        ({count}) |
+        (
+        {count}
+        )
+        |
       </span>
       <span onClick={handleReportClick}>
         {report}
       </span>
       <div className="container-img">
-          <img className="answer-img" src={props.answer.photos[0]} alt="" />
-          <img className="answer-img" src={props.answer.photos[1]} alt="" />
-          <img className="answer-img" src={props.answer.photos[2]} alt="" />
+        <img className="answer-img" src={props.answer.photos[0]} alt="" />
+        <img className="answer-img" src={props.answer.photos[1]} alt="" />
+        <img className="answer-img" src={props.answer.photos[2]} alt="" />
       </div>
 
     </div>
