@@ -1,8 +1,6 @@
 import React from 'react';
 import StyleView from './StyleView.jsx';
 
-
-
 const ProductDetails = (props) => (
   <div id="productView">
     <div>ratings component</div>

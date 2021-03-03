@@ -2,28 +2,28 @@ import React from 'react';
 import reviews from '../Sample_data/SampleReviews.js';
 import ReviewCard from './review-card.jsx';
 
-const Reviews = function(props) {
+const Reviews = ({ reviews }) => {
   // check length of reviews section
   const DisplayReviews = () => {
-    if (props.reviews.length === 0) {
+    if (reviews.length === 0) {
       return (
         <div>No Reviews for this product yet</div>
-      )
-    } else if (props.reviews.length === 1) {
-      return (
-        <div>
-          <ReviewCard review={props.reviews[0]} />
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <ReviewCard review={props.reviews[0]} />
-          <ReviewCard review={props.reviews[1]} />
-        </div>
-      )
+      );
     }
-  }
+    if (reviews.length === 1) {
+      return (
+        <div>
+          <ReviewCard review={reviews[0]} />
+        </div>
+      );
+    }
+    return (
+      <div>
+        <ReviewCard review={reviews[0]} />
+        <ReviewCard review={reviews[1]} />
+      </div>
+    );
+  };
 
   return (
     <div>

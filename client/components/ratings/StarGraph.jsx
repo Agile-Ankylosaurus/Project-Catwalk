@@ -1,57 +1,56 @@
 import React from 'react';
 
-const StarGraph = function(props) {
-  let percent = {};
-  let width = {};
-  for (var key in props.stars) {
-    percent[key] = Math.round(100 * props.stars[key] / props.reviews);
-    width[key] = `width: "${percent[key]}%"`
+const StarGraph = ({ stars, reviews }) => {
+  const percent = {};
+  const width = {};
+  for (const key in stars) {
+    percent[key] = Math.round(100 * stars[key] / reviews);
+    width[key] = `width: '${percent[key]}%'`;
   }
-  var widthFive = width[5];
-  //console.log(width[5], widthFive, percent[5], `"${percent[5]}%"`);
-    return (
-      <div className="star-graph">
-        <div className="starBox">
-          <p>5 Stars</p>
-          <p>{props.stars[5]}</p>
-          <div className="starbar">
-            <div className="starbar-level" style={{'width': "18%"}}></div>
-          </div>
-        </div>
-        <div className="starBox">
-          <p>4 Stars</p>
-          <p>{props.stars[4]}</p>
-          <div className="starbar">
-            <div className="starbar-level"></div>
-          </div>
-        </div>
-        <div className="starBox">
-          <p>3 Stars</p>
-          <p>{props.stars[3]}</p>
-          <div className="starbar">
-            <div className="starbar-level"></div>
-          </div>
-        </div>
-        <div className="starBox">
-          <p>2 Stars</p>
-          <p>{props.stars[2]}</p>
-          <div className="starbar">
-            <div className="starbar-level"></div>
-          </div>
-        </div>
-        <div className="starBox">
-          <p>1 Star</p>
-          <p>{props.stars[1]}</p>
-          <div className="starbar">
-            <div className="starbar-level"></div>
-          </div>
+  const widthFive = width[5];
+  // console.log(width[5], widthFive, percent[5], `"${percent[5]}%"`);
+  return (
+    <div className="star-graph">
+      <div className="starBox">
+        <p>5 Stars</p>
+        <p>{stars[5]}</p>
+        <div className="starbar">
+          <div className="starbar-level" style={{ width: '18%' }} ></div>
         </div>
       </div>
-    )
-  }
+      <div className="starBox">
+        <p>4 Stars</p>
+        <p>{stars[4]}</p>
+        <div className="starbar">
+          <div className="starbar-level" />
+        </div>
+      </div>
+      <div className="starBox">
+        <p>3 Stars</p>
+        <p>{stars[3]}</p>
+        <div className="starbar">
+          <div className="starbar-level" />
+        </div>
+      </div>
+      <div className="starBox">
+        <p>2 Stars</p>
+        <p>{stars[2]}</p>
+        <div className="starbar">
+          <div className="starbar-level" />
+        </div>
+      </div>
+      <div className="starBox">
+        <p>1 Star</p>
+        <p>{stars[1]}</p>
+        <div className="starbar">
+          <div className="starbar-level" />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default StarGraph;
-
 
 // const RatingItem = React.createClass({
 //   render() {

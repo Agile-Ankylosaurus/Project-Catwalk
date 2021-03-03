@@ -7,7 +7,7 @@ import ProductDescription from './productDetails/ProductDescription';
 const axios = require('axios');
 const TOKEN = require('../../config.js');
 
-const App = (props) => {
+const App = () => {
   const [product, setProduct] = useState([]);
   const [styles, setStyles] = useState([
     {
@@ -67,8 +67,8 @@ const App = (props) => {
               .then((ratingMeta) => {
                 // console.log(ratingMeta.data);
                 const metaData = ratingMeta.data;
-                const totalReviews = Number.parseInt(metaData.recommended.false)
-                                 + Number.parseInt(metaData.recommended.true);
+                const totalReviews = parseInt(metaData.recommended.false, 10)
+                                 + parseInt(metaData.recommended.true, 10);
                 setMeta(metaData);
                 // get all reviews for the default product id
                 axios.get(`${url}reviews/?product_id=${productRes.data[0].id}&count=${totalReviews}`, {
@@ -76,8 +76,8 @@ const App = (props) => {
                     Authorization: TOKEN,
                   },
                 })
-                  .then((reviews) => {
-                    setReviews(reviews.data.results);
+                  .then((allReviews) => {
+                    setReviews(allReviews.data.results);
                   })
                   .catch((err) => {
                     console.log('error getting reviews', err);

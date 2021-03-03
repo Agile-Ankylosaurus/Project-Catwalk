@@ -1,20 +1,19 @@
 import React from 'react';
-import axios from 'axios';
 import sampleObj from '../Sample_data/SampleMetadata.js';
 import StarGraph from './StarGraph.jsx';
 import Characteristics from './characteristics.jsx';
 
-var Breakdown = (props) => {
-  const transformData = function(dataObj) {
-    //initialize the transformed data obj
-    let results = {};
+const Breakdown = ({ metaData }) => {
+  const transformData = (dataObj) => {
+    // initialize the transformed data obj
+    const results = {};
 
-    //find the percentage of recommends
-    let recommend = Number.parseInt(dataObj.recommended.true);
-    let notRecommend = Number.parseInt(dataObj.recommended.false);
-    results.pctRecommend = Math.round(100 * recommend / (recommend + notRecommend));
+    // find the percentage of recommends
+    const recommend = parseInt(dataObj.recommended.true, 10);
+    const notRecommend = parseInt(dataObj.recommended.false, 10);
+    results.pctRecommend = Math.round(100 * (recommend / (recommend + notRecommend)));
 
-    //find the number of each star rating and the weighted average
+    // find the number of each star rating and the weighted average
     results.stars = {};
     results.totalReviews = 0;
     results.weightedTotal = 0;
@@ -24,18 +23,17 @@ var Breakdown = (props) => {
       results.weightedTotal += results.stars[i] * Number.parseInt(i);
     }
     if (results.totalReviews) {
-      results.weightedAvg = (Math.round(10 * results.weightedTotal / results.totalReviews)) / 10;
+      results.weightedAvg = (Math.round(10 * (results.weightedTotal / results.totalReviews))) / 10;
     }
 
-    //save all the characteristics into the new obj
+    // save all the characteristics into the new obj
     results.characteristics = {};
     for ( var key in dataObj.characteristics) {
       results.characteristics[key] = dataObj.characteristics[key].value
     }
     return results;
-  }
-  console.log(props);
-  var goodData = transformData(props.metaData);
+  };
+  const goodData = transformData(metaData);
 
   return (
     <div>
@@ -43,14 +41,17 @@ var Breakdown = (props) => {
       <div>
         <span className="stars-rating">
           {[...Array(5)].map( (star, idx) => (
-            <span key={'overallkey' + idx} className="star-shape"></span> ))}
+            <span key={'overallkey' + idx} className="star-shape" />))}
         </span>
       </div>
-      <div className="percent-reviews">{goodData.pctRecommend}% of reviews recommend this product</div>
+      <div className="percent-reviews">
+        {goodData.pctRecommend}
+        % of reviews recommend this product
+      </div>
       <StarGraph stars={goodData.stars} reviews={goodData.totalReviews}/>
       <Characteristics qualities={goodData.characteristics}/>
     </div>
-  )
-}
+  );
+};
 
 export default Breakdown;

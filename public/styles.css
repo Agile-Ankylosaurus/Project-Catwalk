@@ -3,6 +3,7 @@
   padding: 0;
   list-style: none;
   text-decoration:none;
+  box-sizing: border-box;
 }
 
 body {
@@ -43,7 +44,6 @@ body {
 }
 
 .logo-search {
-  float: right;
   vertical-align: top;
   display: inline-block;
   line-height: 25px;
@@ -247,7 +247,7 @@ body {
   float: left;
   height: 45px;
   font-weight: bold;
-  text-size: 50px;
+  font-size: 40px;
 }
 .stars-rating {
   display: inline-block;
@@ -338,6 +338,24 @@ body {
   font-size: 15px;
   margin-bottom: 10px;
 }
+.review-img-small {
+  max-height: 75px;
+  max-width: 75px;
+  height: auto;
+  width: auto;
+  margin: 10px;
+}
+.review-img-large {
+  min-height: 200px;
+  max-width: 350px;
+  height: auto;
+  width: auto;
+  margin: 10px;
+}
+.modal-content {
+  box-shadow: 0 8px 6px -6px black;
+  position: static;
+}
 .review-response {
   font-size: 15px;
   background-color: #aaa;
@@ -349,4 +367,15 @@ body {
   width: 100%;
   border-bottom: 2px solid #888;
   margin-bottom: 15px;
+}
+.modal-footer button {
+  display: block;
+  font-size: 1rem;
+  margin-left: auto;
+  padding: 0.5rem 1.8rem;
+  background: #DD501D;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }

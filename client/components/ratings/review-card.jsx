@@ -1,64 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
+import StarRating from './StarRating.jsx';
+import ImageModal from './imageModal.jsx';
 
-const ReviewCard = function(props) {
-  const StarRating = () => {
-    for (let i = 0; i < props.review.rating; i++) {
-      starArray[i] = <span className="star-shape" style={{'backgroundColor': "#074b36"}}></span>
-    }
-    for (let j = props.review.rating; j < 5; j++) {
-      starArray[j] = <span className="star-shape"></span>
-    }
-  }
+const ReviewCard = ({ review }) => {
+
+  // adding the recommend line if applicable
   const Recommend = () => {
-    if (props.review.recommend) {
-      return <span className="review-body">I recommend this item.</span>
-    } else {
-      return <></>
+    if (review.recommend) {
+      return <div className="review-body">I recommend this item.</div>;
     }
-  }
+    return <></>;
+  };
+
+  // adding the response section, if applicable
   const Response = () => {
-    if (props.review.response) {
+    if (review.response) {
       return (
         <div className="review-response">
-          <div className="review-response" style={{'fontWeight': 'bold'}}>Response:</div>
-          <span className="review-response">{props.review.response}</span>
+          <div className="review-response" style={{ fontWeight: 'bold' }}>Response:</div>
+          <span className="review-response">{review.response}</span>
         </div>
-      )
-    } else {
-      return <></>
+      );
     }
-  }
+    return <></>;
+  };
+
+  // main render
   return (
     <div>
-      <span style={{'padding': '10px 0'}}>
-        {[...Array(5)].map( (item, index) => {
-          if (index < props.review.rating) {
-            return (
-              <span key={props.review.date + index}
-                className="star-shape"
-                style={{'backgroundColor': "#074b36"}}>
-              </span>
-            );
-          } else {
-            return (
-              <span key={props.review.date + index}
-                className="star-shape">
-              </span>
-            );
-          }
-        })}
-      </span>
+      <StarRating number={review.rating} uniqNum={review.date} />
       <span className="review-info">
-        {props.review.reviewer_name},   {moment(props.review.date).format('LL')}
+        {review.reviewer_name},  {moment(review.date).format('LL')}
       </span>
-      <div className="review-summary">{props.review.summary}</div>
-      <div className="review-body">{props.review.body}</div>
+      <div className="review-summary">{review.summary}</div>
+      <div className="review-body">{review.body}</div>
       <Recommend />
+      {review.photos.map( (photo) => (
+        <ImageModal photo={photo} />
+      ))}
       <Response />
-      <div className="review-help">Helpful? Yes ({props.review.helpfulness})  |  Report</div>
+      <div className="review-help">
+        Helpful? Yes (
+        {review.helpfulness}
+        )  |  Report
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default ReviewCard;
