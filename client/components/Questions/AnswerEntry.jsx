@@ -17,6 +17,10 @@ const AnswerEntry = (props) => {
   const handleReportClick = () => {
     setReport(report === 'Report' ? 'Reported' : 'Reported');
   };
+  // props.answer.photos.map((photo) =>
+  //   console.log(photo),
+  //   <img src={photo.photos} alt="" />
+  // )
 
   return (
     <div className="answer-entry">

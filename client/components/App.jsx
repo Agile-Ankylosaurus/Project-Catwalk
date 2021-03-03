@@ -32,14 +32,19 @@ const App = () => {
   const [reviews, setReviews] = useState([]);
   const [questions, setQuestions] = useState([]);
 
+  // functions
+  const handleStyleClick = (e) => {
+    setSelectedStyle(parseInt(e.target.attributes.styleidx.value), 10);
+  };
+
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    // const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20118';
+    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20118';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
 
     // get the default product to populate the page on start up
-    axios.get(`${url}products`, {
+    axios.get(targetedProductURL, {
       headers: {
         Authorization: TOKEN,
       },
@@ -49,9 +54,9 @@ const App = () => {
     })
       .then((productRes) => {
         // console.log(productRes.data[0]);
-        setProduct(productRes.data[0]);
+        setProduct(productRes.data);
         // get the styles data from the default product id
-        axios.get(`${url}products/${productRes.data[0].id}/styles`, {
+        axios.get(`${url}products/${productRes.data.id}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
@@ -60,7 +65,7 @@ const App = () => {
             // console.log(styleRes);
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
-            axios.get(`${url}reviews/meta?product_id=${productRes.data[0].id}`, {
+            axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
               headers: {
                 Authorization: TOKEN,
               },
@@ -72,7 +77,7 @@ const App = () => {
                                  + parseInt(metaData.recommended.true, 10);
                 setMeta(metaData);
                 // get all reviews for the default product id
-                axios.get(`${url}reviews/?product_id=${productRes.data[0].id}&count=${totalReviews}`, {
+                axios.get(`${url}reviews/?product_id=${productRes.data.id}&count=${totalReviews}`, {
                   headers: {
                     Authorization: TOKEN,
                   },
@@ -124,7 +129,12 @@ const App = () => {
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />
-        <ProductDetailsView product={product} styles={styles} selectedStyle={selectedStyle} />
+        <ProductDetailsView
+          product={product}
+          styles={styles}
+          selectedStyle={selectedStyle}
+          handleStyleClick={handleStyleClick}
+        />
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <ProductDescription product={product} styles={styles} selectedStyle={selectedStyle} />
