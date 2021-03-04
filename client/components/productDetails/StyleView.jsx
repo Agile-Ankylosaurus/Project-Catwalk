@@ -15,7 +15,7 @@ const StyleView = (props) => {
             key={style.style_id}
             >
             <img
-              id={style.style_id + 'a'}
+              id={style.style_id}
               styleidx={idx}
               alt={style.name + product.name}
               src={style.photos[0].thumbnail_url}
@@ -23,7 +23,7 @@ const StyleView = (props) => {
               key={style.style_id}
               />
             <img
-              key={style.style_id + 'b'}
+              key={style.style_id}
               src="./img/checkmark.png"
               className={idx === selectedStyle ? 'ShowEle checkmark' : 'hiddenEle '}
             />
