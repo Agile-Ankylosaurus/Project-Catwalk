@@ -83,7 +83,8 @@ const App = () => {
             // console.log(styleRes);
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
-            axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
+            // console.log(styleRes.data)
+            axios.get(`${url}reviews/meta?product_id=${styleRes.data.product_id}`, {
               headers: {
                 Authorization: TOKEN,
               },
@@ -95,7 +96,7 @@ const App = () => {
                                  + parseInt(metaData.recommended.true, 10);
                 setMeta(metaData);
                 // get all reviews for the default product id
-                axios.get(`${url}reviews/?product_id=${productRes.data.id}&count=${totalReviews}`, {
+                axios.get(`${url}reviews/?product_id=${styleRes.data.product_id}&count=${totalReviews}`, {
                   headers: {
                     Authorization: TOKEN,
                   },
@@ -103,7 +104,7 @@ const App = () => {
                   .then((reviews) => {
                     setReviews(reviews.data.results);
                     // get questions for q&a
-                    axios.get(`${url}qa/questions/?product_id=${productRes.data[0].id}`, {
+                    axios.get(`${url}qa/questions/?product_id=${styleRes.data.product_id}`, {
                       headers: {
                         Authorization: TOKEN,
                       },

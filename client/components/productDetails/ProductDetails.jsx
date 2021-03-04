@@ -81,7 +81,7 @@ const ProductDetails = (props) => {
       {/* <select id="sizeBar" name="SELECT SIZE" onChange={(e) => { setSKU(e.target.value); }}> */}
         <option value="">Select Size</option>
         {Object.entries(styles[selectedStyle].skus).map((key) => (
-          key[1].quantity !== 0 ? <option value={key[0]} key={key[0]}>{key[1].size}</option> : <option key={key[0]}/>
+          key[1].quantity !== 0 ? <option value={key[0]} key={`${key[0]}${key[1].size}`}>{key[1].size}</option> : <option key={`${key[0]}${key[1].size}`}/>
         ))}
       </select>
       <select id="qtyBar" className="m20" name="QUANTITY">
