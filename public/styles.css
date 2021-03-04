@@ -263,7 +263,7 @@ body {
 }
 
 .accordion-section {
-  display: flex; 
+  display: flex;
   flex-direction: column;
 }
 
@@ -271,7 +271,7 @@ body {
   background-color: transparent;
   background-repeat: no-repeat;
   overflow: hidden;
-  cursor: pointer; 
+  cursor: pointer;
   padding: 18px;
   display: flex;
   align-items: center;
@@ -280,14 +280,14 @@ body {
   transition: background-color 0.6s ease;
 }
 
-.accordion:hover, 
+.accordion:hover,
 .active {
   background-color: #ccc;
 }
 
 .accordian-content {
   overflow: scroll;
-  transition: max-height 0.6s ease; 
+  transition: max-height 0.6s ease;
 }
 
 
@@ -420,7 +420,6 @@ body {
 .review-cards {
   max-height: 1000px;
   overflow-y: scroll;
-  scroll-bar: auto;
 }
 .review-head {
   font-size: 18px;
