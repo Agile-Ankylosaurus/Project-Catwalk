@@ -13,15 +13,17 @@ const StyleView = (props) => {
             onClick={handleStyleClick}
             className="styleButton"
             key={style.style_id}
-          >
+            >
             <img
-              id={style.style_id}
+              id={style.style_id + 'a'}
               styleidx={idx}
               alt={style.name + product.name}
               src={style.photos[0].thumbnail_url}
               className={idx === selectedStyle ? 'selectedStyle' : 'styleThumbnail '}
-            />
+              key={style.style_id}
+              />
             <img
+              key={style.style_id + 'b'}
               src="./img/checkmark.png"
               className={idx === selectedStyle ? 'ShowEle checkmark' : 'hiddenEle '}
             />

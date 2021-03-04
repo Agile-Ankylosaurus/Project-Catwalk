@@ -18,6 +18,12 @@ const App = () => {
         url: '',
       }],
       style_id: '00000',
+      skus: {
+        0: {
+          quantity: 0,
+          size: '',
+        },
+      },
     },
   ]);
   const [selectedStyle, setSelectedStyle] = useState(0);
@@ -42,9 +48,21 @@ const App = () => {
     const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20118';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
+    const productLimit = 20;
+    const randomNumberGenerator = (max) => {
+      let result = Math.floor(Math.random() * Math.floor(max));
+      if (result < 10) {
+        result = `2011${result.toString()}`;
+        return result;
+      }
+      result = `201${result.toString()}`;
+      return result;
+    };
+    const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}/styles`;
+    console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(targetedProductURL, {
+    axios.get(randomProductUrl, {
       headers: {
         Authorization: TOKEN,
       },
@@ -52,15 +70,15 @@ const App = () => {
         count: 1,
       },
     })
-      .then((productRes) => {
-        // console.log(productRes.data[0]);
-        setProduct(productRes.data);
-        // get the styles data from the default product id
-        axios.get(`${url}products/${productRes.data.id}/styles`, {
-          headers: {
-            Authorization: TOKEN,
-          },
-        })
+      // .then((productRes) => {
+      //   // console.log(productRes.data[0]);
+      //   setProduct(productRes.data);
+      //   // get the styles data from the default product id
+      //   axios.get(`${url}products/${productRes.data.id}/styles`, {
+      //     headers: {
+      //       Authorization: TOKEN,
+      //     },
+      //   })
           .then((styleRes) => {
             // console.log(styleRes);
             setStyles(styleRes.data.results);
@@ -108,10 +126,10 @@ const App = () => {
           .catch((err) => {
             throw err;
           });
-      })
-      .catch((err) => {
-        throw err;
-      });
+      // })
+      // .catch((err) => {
+      //   throw err;
+      // });
   };
 
   useState(getOneProduct);
