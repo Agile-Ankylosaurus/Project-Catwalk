@@ -313,6 +313,7 @@ body {
   font-weight: bold;
   padding: 10px;
   margin: 10px;
+  cursor: pointer;
 }
 
 .overall-rating {
@@ -321,18 +322,37 @@ body {
   font-weight: bold;
   font-size: 40px;
 }
-.stars-rating {
-  display: inline-block;
-  padding: 5px 0 20px 10px;
-  height: 20px;
-}
-.percentage-reviews{
+.percent-reviews{
   width: 100%;
+  font-size: 15px;
 }
 .reviews {
   width: 65%;
   display: inline;
   float: right;
+}
+.stars-rating {
+  display: inline-block;
+  padding: 5px 0 20px 10px;
+  height: 15px;
+  margin-bottom: 20px;
+}
+.overall-level {
+  background: #074b36;
+  height:15px;
+  top: 15px;
+}
+.allstars {
+  display: inline;
+}
+.star-shape {
+  display: inline-block;
+  margin: 1px;
+  height: 15px;
+  width: 15px;
+  background-color: #aaa;
+  clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
+  -webkit-clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
 }
 .starBox {
   box-sizing: border-box;
@@ -362,14 +382,21 @@ body {
   width: 100%;
   height:8px;
 }
-.star-shape {
+.quality {
+  display: inline;
+}
+.slider-shape {
   display: inline-block;
   margin: 1px;
-  height: 15px;
-  width: 15px;
-  background-color: #999;
-  clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
-  -webkit-clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
+  height: 10px;
+  width: 10px;
+  bottom: -5px;
+  background-color: #333;
+  clip-path: polygon(0% 33%, 100% 33%, 50% 100%);
+  -webkit-clip-path: polygon(0% 33%, 100% 33%, 50% 100%);
+}
+.slider {
+  float: right;
 }
 .qualbar {
   background: #aaa;
@@ -389,6 +416,11 @@ body {
   float: right;
   position: relative;
   top: 2px;
+}
+.review-cards {
+  max-height: 1000px;
+  overflow-y: scroll;
+  scroll-bar: auto;
 }
 .review-head {
   font-size: 18px;
@@ -416,16 +448,17 @@ body {
   height: auto;
   width: auto;
   margin: 10px;
+  cursor: zoom-in;
 }
 .review-img-large {
-  min-height: 200px;
-  max-width: 350px;
+  max-height: 400px;
   height: auto;
   width: auto;
-  margin: 10px;
+  margin:5px;
+  cursor: zoom-out;
 }
 .modal-content {
-  box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0 8px 6px black;
   position: static;
 }
 .review-response {
@@ -443,9 +476,9 @@ body {
 .modal-footer button {
   display: block;
   font-size: 1rem;
-  margin-left: auto;
+  margin-right: auto;
   padding: 0.5rem 1.8rem;
-  background: #DD501D;
+  background: #074b36;
   color: #fff;
   border: none;
   outline: none;

@@ -1,21 +1,18 @@
 import React from 'react';
-import Breakdown from './data-breakdown.jsx';
-import Reviews from './reviewSection.jsx';
+import Breakdown from './data-breakdown';
+import Reviews from './reviewSection';
 
-const RatingsApp = ({ metaData, reviews }) => (
+const RatingsApp = ({ metaData, reviews, setReviews }) => {
+  return (
   <div className="ratings-module">
     <span className="ratings-title">Ratings &amp; Reviews</span>
     <div className="metadata-sidebar">
       <Breakdown metaData={metaData} />
     </div>
     <div className="reviews">
-      <div>
-        <Reviews reviews={reviews} />
-        <button type="submit" className="big-review-btn">More Reviews</button>
-        <button type="submit" className="big-review-btn">Add A Review +</button>
-      </div>
+      <Reviews reviews={reviews} product={metaData.product_id} setReviews={setReviews} />
     </div>
   </div>
-);
+)};
 
 export default RatingsApp;
