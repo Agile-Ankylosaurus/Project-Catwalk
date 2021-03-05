@@ -59,7 +59,7 @@ const App = () => {
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
     const randomNumberGenerator = (max) => {
-      let result = Math.floor(Math.random() * Math.floor(max)) + 1;
+      let result = Math.floor(Math.random() * Math.floor(max) + 1);
       if (result < 10) {
         result = `2011${result.toString()}`;
         return result;
