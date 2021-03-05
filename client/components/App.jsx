@@ -136,10 +136,10 @@ const App = () => {
           .catch((err) => {
             throw err;
           });
-      // })
-      // .catch((err) => {
-      //   throw err;
-      // });
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   useState(getOneProduct);
