@@ -95,13 +95,13 @@ const ProductDetails = (props) => {
 
       </div>
       <div className="flexSpaceBetween">
-        <div id="addToBag" className="m20">
+        <button type="submit" id="addToBag" className="">
           <span>ADD TO BAG</span>
           <span className=""> +</span>
-        </div>
-        <div className="star m20">
+        </button>
+        <button type="" className="star">
           *
-        </div>
+        </button>
       </div>
     </div>
   );
