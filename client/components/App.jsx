@@ -69,7 +69,6 @@ const App = () => {
     };
     const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}`;
     console.log(randomProductUrl);
-    console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
     axios.get(randomProductUrl, {
