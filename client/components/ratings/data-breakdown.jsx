@@ -36,7 +36,7 @@ const Breakdown = ({ metaData }) => {
     }
     return results;
   }
-  // console.log(props);
+
   var goodData = transformData(metaData);
 
   return (

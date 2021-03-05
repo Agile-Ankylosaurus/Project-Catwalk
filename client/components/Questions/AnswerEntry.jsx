@@ -5,15 +5,13 @@ const AnswerEntry = (props) => {
   // console.log('answerEntry: ', props);
   const [count, setCount] = useState(props.answer.helpfulness);
   const [report, setReport] = useState('Report');
-  // const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState(false);
 
-  // const handleYesClick = () => {
-  //   console.log('i am here');
-  //   if (setDisable) {
-  //     setCount(count + 1);
-  //   }
-  //   setDisable(false);
-  // };
+  const handleYesClick = () => {
+    setCount(disable === false ? count + 1 : count);
+    setDisable(true);
+  };
+
   const handleReportClick = () => {
     setReport(report === 'Report' ? 'Reported' : 'Reported');
   };
@@ -33,7 +31,7 @@ const AnswerEntry = (props) => {
       </span>
       <span>
         | Helpful?
-        <span onClick={() => setCount(count + 1)}>
+        <span onClick={handleYesClick}>
           Yes
         </span>
         (

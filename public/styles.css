@@ -287,7 +287,54 @@ body {
 
 .accordian-content {
   overflow: scroll;
+<<<<<<< HEAD
   transition: max-height 0.6s ease;
+=======
+  transition: max-height 0.6s ease; 
+  background-color: whitesmoke;
+}
+
+.accordion-q-section {
+  display: flex; 
+  flex-direction: column;
+}
+
+.accordion-q {
+  background-color: #eee;
+  color: #444;
+  overflow: hidden;
+  cursor: pointer; 
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  border: none;
+  outline: none;
+  transition: background-color 0.6s ease;
+}
+
+.accordion-q:hover, 
+.active {
+  background-color: #ccc;
+}
+
+.accordian-q-content {
+  overflow: scroll;
+  transition: max-height 0.6s ease; 
+  /* display: flex;
+  position: absolute;
+  bottom: 0px;
+  background-color: white;  */
+}
+
+.chevron {
+  margin-left: auto;
+  float: right;
+  transition: transform 0.6s ease;
+}
+
+.chevron-rotate {
+  transform: rotate(90deg);
+>>>>>>> questions accordion done and fixed count issue
 }
 
 
