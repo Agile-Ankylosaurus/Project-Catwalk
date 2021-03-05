@@ -50,6 +50,14 @@ body {
   margin: 25px 14px;
 }
 
+.paddingTop15px {
+  padding-top: 15px;
+}
+
+.paddingLeft10px {
+  padding-left: 10px;
+}
+
 .gridContainer {
   display: grid;
 }
@@ -134,17 +142,14 @@ body {
 #productView {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto
+  flex: 1 1 auto;
+  margin-left: 20px;
 }
 
 #imgNormalView {
   display: block;
   width: 800px;
   height: 700px;
-}
-
-#sizeBar {
-
 }
 
 #addToBag {
@@ -166,6 +171,10 @@ body {
 
 /*product details*/
 
+.ratingsComponent {
+  margin-bottom: 10px;
+}
+
 .origStrike {
   text-decoration: line-through;
 }
@@ -174,37 +183,31 @@ body {
   color: red;
   padding-left: 5px;
 }
-
+/* Style Component */
 .styleThumbnail {
-  width: 50px;
-  height: 50px;
-  border-radius: 2em;
+  width: 65px;
+  height: 65px;
+  border-radius: 4em;
   border: 2px solid black;
-  margin: 5px;
+  margin-right: 15px;
+  margin-bottom: 10px;
 }
 
 .selectedStyle {
   background-image: ".img/checkmark.png";
-}
-
-.selectedStyle {
-  width: 50px;
-  height: 50px;
-  border-radius: 2em;
   border: 2px solid gold;
-  margin: 5px;
 }
 
 .checkmark {
   position: absolute;
-  top: 5%;
+  top: 15%;
   left: 65%;
-  width: 11px;
-  height: 11px;
+  width: 14px;
+  height: 14px;
   border: 1px solid black;
   border-radius: 2em;
   background-color: white;
-  padding: 2px;
+  padding: 1px;
 }
 
 .hiddenEle {
@@ -215,8 +218,36 @@ body {
   position: relative;
   border: 0px;
   padding: 0px;
+  outline: none;
   background-color: transparent;
   cursor: pointer;
+}
+
+/* add to bag */
+.sizeQtyBarContainer {
+  display: flex;
+}
+
+#sizeBar {
+  flex: 4 1 auto;
+  /* max-width: auto; */
+  height: 60px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+#qtyBar {
+  flex: 1 1 auto;
+  /* width: 140px; */
+  height: 60px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
 }
 
 
@@ -263,7 +294,7 @@ body {
 }
 
 .accordion-section {
-  display: flex; 
+  display: flex;
   flex-direction: column;
 }
 
@@ -271,7 +302,7 @@ body {
   background-color: transparent;
   background-repeat: no-repeat;
   overflow: hidden;
-  cursor: pointer; 
+  cursor: pointer;
   padding: 18px;
   display: flex;
   align-items: center;
@@ -280,14 +311,14 @@ body {
   transition: background-color 0.6s ease;
 }
 
-.accordion:hover, 
+.accordion:hover,
 .active {
   background-color: #ccc;
 }
 
 .accordian-content {
   overflow: scroll;
-  transition: max-height 0.6s ease; 
+  transition: max-height 0.6s ease;
 }
 
 

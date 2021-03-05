@@ -58,7 +58,8 @@ const App = () => {
       result = `201${result.toString()}`;
       return result;
     };
-    const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}/styles`;
+    const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}`;
+    console.log(randomProductUrl);
     console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
@@ -70,15 +71,15 @@ const App = () => {
         count: 1,
       },
     })
-      // .then((productRes) => {
-      //   // console.log(productRes.data[0]);
-      //   setProduct(productRes.data);
-      //   // get the styles data from the default product id
-      //   axios.get(`${url}products/${productRes.data.id}/styles`, {
-      //     headers: {
-      //       Authorization: TOKEN,
-      //     },
-      //   })
+      .then((productRes) => {
+        // console.log(productRes.data[0]);
+        setProduct(productRes.data);
+        // get the styles data from the default product id
+        axios.get(`${randomProductUrl}/styles`, {
+          headers: {
+            Authorization: TOKEN,
+          },
+        })
           .then((styleRes) => {
             // console.log(styleRes);
             setStyles(styleRes.data.results);
@@ -127,10 +128,10 @@ const App = () => {
           .catch((err) => {
             throw err;
           });
-      // })
-      // .catch((err) => {
-      //   throw err;
-      // });
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   useState(getOneProduct);
