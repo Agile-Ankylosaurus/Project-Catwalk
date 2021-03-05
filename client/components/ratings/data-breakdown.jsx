@@ -1,7 +1,8 @@
 import React from 'react';
-import sampleObj from '../Sample_data/SampleMetadata.js';
-import StarGraph from './StarGraph.jsx';
-import Characteristics from './characteristics.jsx';
+import sampleObj from '../Sample_data/SampleMetadata';
+import StarRating from './StarRating';
+import StarGraph from './StarGraph';
+import Characteristics from './characteristics';
 
 const Breakdown = ({ metaData }) => {
   const transformData = (dataObj) => {
@@ -24,16 +25,17 @@ const Breakdown = ({ metaData }) => {
     }
     if (results.totalReviews) {
       results.weightedAvg = (Math.round(10 * (results.weightedTotal / results.totalReviews))) / 10;
+      results.pctOverall = Math.round(20 * (results.weightedTotal / results.totalReviews));
     }
+    console.log(results.pctOverall);
 
     // save all the characteristics into the new obj
     results.characteristics = {};
-    for ( var key in dataObj.characteristics) {
-      results.characteristics[key] = dataObj.characteristics[key].value
+    for (const key in dataObj.characteristics) {
+      results.characteristics[key] = dataObj.characteristics[key].value;
     }
     return results;
   }
-  // console.log(props);
   var goodData = transformData(metaData);
 
   return (
@@ -41,16 +43,15 @@ const Breakdown = ({ metaData }) => {
       <h1 className="overall-rating">{goodData.weightedAvg}</h1>
       <div>
         <span className="stars-rating">
-          {[...Array(5)].map( (star, idx) => (
-            <span key={'overallkey' + idx} className="star-shape" />))}
+          <StarRating number={goodData.weightedAvg} uniqNum={goodData.weightedTotal} />
         </span>
       </div>
       <div className="percent-reviews">
         {goodData.pctRecommend}
         % of reviews recommend this product
       </div>
-      <StarGraph stars={goodData.stars} reviews={goodData.totalReviews}/>
-      <Characteristics qualities={goodData.characteristics}/>
+      <StarGraph stars={goodData.stars} reviews={goodData.totalReviews} />
+      <Characteristics qualities={goodData.characteristics} />
     </div>
   );
 };

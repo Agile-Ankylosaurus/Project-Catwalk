@@ -2,16 +2,18 @@ import React from 'react';
 
 const Characteristics = ({ qualities }) => {
   const quals = Object.keys(qualities);
+  // style={{width: `${Math.round(100 * (qualities[quality] / 5))}%`}}
   return (
-    <div className="quality">
+    <div>
       {quals.map((quality, idx) => (
         <div key={quality + idx}>
-          <div>
+          <div className="quality">
             {quality}
-            ,
-            {' '}
-            {Math.round(100 * (qualities[quality] / 5))}
-            %
+            <div className="slider"
+              style={{width: `${100 - (Math.round(100 * (qualities[quality] / 5)))}%`}}
+            >
+              <span className="slider-shape"></span>
+            </div>
           </div>
           <div className="qualbar" />
           <span className="low-qual">{meanings[quality][1]}</span>

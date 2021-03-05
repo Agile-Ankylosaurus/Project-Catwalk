@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import StarRating from './StarRating.jsx';
-import ImageModal from './imageModal.jsx';
+import StarRating from './StarRating';
+import ImageModal from './imageModal';
 
 const ReviewCard = ({ review }) => {
 
@@ -37,7 +37,7 @@ const ReviewCard = ({ review }) => {
       <div className="review-body">{review.body}</div>
       <Recommend />
       {review.photos.map( (photo) => (
-        <ImageModal photo={photo} />
+        <ImageModal key={photo.id} photo={photo} />
       ))}
       <Response />
       <div className="review-help">

@@ -12,7 +12,11 @@ const ImageModal = ({ photo }) => {
     <span>
       {isOpen ?
         <div className="modal-content">
-          <img key={photo.id} className="review-img-large" src={photo.url} alt="no image" />
+          <img key={photo.id}
+            className="review-img-large"
+            src={photo.url}
+            alt="no image"
+            onClick={handleClick} />
           <div className="modal-footer">
             <button onClick={handleClick} className="btn-cancel">Close</button>
           </div>
@@ -22,7 +26,7 @@ const ImageModal = ({ photo }) => {
           src={photo.url}
           alt="no image"
           onClick={handleClick}
-      />}
+      /> }
     </span>
   )
 };

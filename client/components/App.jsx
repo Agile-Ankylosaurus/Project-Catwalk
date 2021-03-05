@@ -136,10 +136,10 @@ const App = () => {
           .catch((err) => {
             throw err;
           });
-      })
-      .catch((err) => {
-        throw err;
-      });
+      // })
+      // .catch((err) => {
+      //   throw err;
+      // });
   };
 
   useState(getOneProduct);
@@ -174,7 +174,7 @@ const App = () => {
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <div id="reviews-ratings">
-          <RatingsApp metaData={meta} reviews={reviews} />
+          <RatingsApp metaData={meta} reviews={reviews} setReviews={setReviews} />
         </div>
         <div className="gridSpacer" />
       </div>

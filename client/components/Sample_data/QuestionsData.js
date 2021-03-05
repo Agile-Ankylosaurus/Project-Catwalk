@@ -159,7 +159,7 @@ const productQuestion = {
       question_body: 'Velit fugiat reiciendis odio nemo eveniet alias.',
       question_date: '2020-07-18T00:00:00.000Z',
       asker_name: 'Rebeca.Grant',
-      question_helpfulness: 25,
+      question_helpfulness: 30,
       reported: false,
       answers: {
         1259428: {
