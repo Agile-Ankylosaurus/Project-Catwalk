@@ -250,7 +250,11 @@ body {
   margin: 10px;
 }
 
+/* Product Description*/
 
+.featureCheckmark {
+  width: 15px;
+}
 
 /* ------------------------- Questions and Answers Module -----------------------------*/
 

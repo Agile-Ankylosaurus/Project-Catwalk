@@ -8,7 +8,16 @@ const axios = require('axios');
 const TOKEN = require('../../config.js');
 
 const App = () => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState(
+    {
+      features: [
+        {
+          feature: '',
+          value: '',
+        },
+      ],
+    },
+  );
   const [styles, setStyles] = useState([
     {
       name: '',
