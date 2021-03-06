@@ -4,6 +4,7 @@ const AnswerModal = (props) => {
   const [answerValue, setAnswerValue] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [file, setFile] = useState([]);
 
   if (!props.show) {
     return null;
@@ -18,14 +19,21 @@ const AnswerModal = (props) => {
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
+  const fileChange = (e) => {
+    const array = [];
+    for (let i = 0; i < file.length; i += 1) {
+      array.push(file[i]);
+    }
+    array.push(URL.createObjectURL(e.target.files[0]));
+    setFile(array);
+  };
 
-// const handleAnswerSubmit = () => {
-// if (answerValue.length === 0 || nickname.length === 0 || email.length === 0) {
-//     return 
-// }
-// };
-
-  
+  const handleAnswerSubmit = () => {
+    if (answerValue.length === 0 || nickname.length === 0 || email.length === 0) {
+      <div>You must enter any of the following: Answer, Nickname, Email</div>;
+    }
+    console.log(answerValue, nickname, email);
+  };
 
   return (
     <div className="modal-a">
@@ -53,8 +61,11 @@ const AnswerModal = (props) => {
               For authentication reasons, you will not be emailed
             </div>
           </div>
-          <button type="button">Upload your photos</button>
-          <button type="button">Submit</button>
+          <input type="file" onChange={fileChange} />
+          {file.map((photo, idx) => <img src={photo} key={idx} alt="" className="upload-photo" />)}
+          <div>
+            <button type="button" onClick={handleAnswerSubmit}>Submit</button>
+          </div>
         </form>
         <div className="modal-a-footer">
           <button type="button" onClick={props.onClose} className="close-a-btn">Close</button>

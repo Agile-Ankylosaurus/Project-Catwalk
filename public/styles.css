@@ -255,7 +255,7 @@ body {
   float: right;
 }
 
-.answer-img {
+.answer-img, .upload-photo {
   max-height: 100px;
   max-width: 100px;
   height: auto;
