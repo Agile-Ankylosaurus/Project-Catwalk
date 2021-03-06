@@ -146,11 +146,6 @@ body {
   margin-left: 20px;
 }
 
-#imgNormalView {
-  display: block;
-  width: 800px;
-  height: 700px;
-}
 
 
 #productDiscContainer {
@@ -159,6 +154,37 @@ body {
 #productDiscContainer > ul{
   width: auto;
 }
+
+/* img normal view */
+
+#imgSlider {
+  width: 800px;
+  background-color: yellow;
+  height: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.imgNormalSlide{
+  float: left;
+  margin: 0px;
+  padding: 0px;
+  height: 700px;
+  width: 800px;
+  position: relative;
+}
+
+.imgContainer {
+  width: 5600px;
+  background-color: pink;
+  height: 700px;
+  clear: both;
+  position: relative;
+}
+
+
 
 /*product details*/
 

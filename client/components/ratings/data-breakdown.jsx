@@ -27,7 +27,7 @@ const Breakdown = ({ metaData }) => {
       results.weightedAvg = (Math.round(10 * (results.weightedTotal / results.totalReviews))) / 10;
       results.pctOverall = Math.round(20 * (results.weightedTotal / results.totalReviews));
     }
-    console.log(results.pctOverall);
+    // console.log(results.pctOverall);
 
     // save all the characteristics into the new obj
     results.characteristics = {};

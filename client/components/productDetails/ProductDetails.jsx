@@ -11,7 +11,7 @@ const ProductDetails = (props) => {
 
   const arrMaker = (itemQty) => {
     setArr([0]);
-    let tempArr = [];
+    const tempArr = [];
     if (itemQty > 15) {
       for (let i = 1; i <= 15; i += 1) {
         tempArr.push(i);
