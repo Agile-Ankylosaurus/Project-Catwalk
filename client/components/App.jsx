@@ -8,7 +8,16 @@ const axios = require('axios');
 const TOKEN = require('../../config.js');
 
 const App = () => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState(
+    {
+      features: [
+        {
+          feature: '',
+          value: '',
+        },
+      ],
+    },
+  );
   const [styles, setStyles] = useState([
     {
       name: '',
@@ -50,7 +59,7 @@ const App = () => {
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
     const randomNumberGenerator = (max) => {
-      let result = Math.floor(Math.random() * Math.floor(max));
+      let result = Math.floor(Math.random() * Math.floor(max) + 1);
       if (result < 10) {
         result = `2011${result.toString()}`;
         return result;
@@ -58,7 +67,7 @@ const App = () => {
       result = `201${result.toString()}`;
       return result;
     };
-    const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}/styles`;
+    const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}`;
     console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
@@ -121,6 +130,8 @@ const App = () => {
   };
 
   useState(getOneProduct);
+
+  console.log(product);
 
   return (
     <div className="">

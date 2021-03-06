@@ -30,14 +30,14 @@ const AnswersList = (props) => {
   };
 
   const answers = twoAnswers();
-  const restOfAnswers = helpfulSort.slice(3, helpfulSort.length - 1);
+  const restOfAnswers = helpfulSort.slice(3, helpfulSort.length);
 
   const MoreAnswers = () => {
     if (answerValues.length > 2) {
       return (
         <div>
           <AnswerAccordion
-            title="See more answers"
+            title="See More Answers"
             content={restOfAnswers.map((answer) => <AnswerEntry key={answer.id} answer={answer} />)}
           />
         </div>
@@ -55,9 +55,5 @@ const AnswersList = (props) => {
     </div>
   );
 };
-
-// /* <form className="load-answers">
-// <input type="submit" value="Load More Answers" />
-// </form> */
 
 export default AnswersList;

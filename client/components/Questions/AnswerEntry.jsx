@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 
 const AnswerEntry = (props) => {
   // console.log('answerEntry: ', props);
   const [count, setCount] = useState(props.answer.helpfulness);
   const [report, setReport] = useState('Report');
-  // const [disable, setDisable] = useState(false);
+  const [disable, setDisable] = useState(false);
 
-  // const handleYesClick = () => {
-  //   console.log('i am here');
-  //   if (setDisable) {
-  //     setCount(count + 1);
-  //   }
-  //   setDisable(false);
-  // };
+  const handleYesClick = () => {
+    setCount(disable === false ? count + 1 : count);
+    setDisable(true);
+  };
+
   const handleReportClick = () => {
     setReport(report === 'Report' ? 'Reported' : 'Reported');
   };
@@ -22,19 +19,37 @@ const AnswerEntry = (props) => {
   //   <img src={photo.photos} alt="" />
   // )
 
+  const formattedDate = (date) => {
+    const tempDate = new Date(date).toLocaleDateString('en-gb', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    const dateArr = tempDate.split(' ');
+    return `${dateArr[1]} ${dateArr[0]}, ${dateArr[2]}`;
+  };
+
   return (
     <div className="answer-entry">
-      <div>A: {props.answer.body}</div>
+      <div>
+        A: {props.answer.body}
+      </div>
       <span className="user-info">
-        by {props.answer.answerer_name}
+        by
+        {props.answer.answerer_name}
+        ,
+        {'   '}
       </span>
       <span>
-        {moment(props.answer.date).format('LL')}
+        {formattedDate(props.answer.date)}
+        {'   '}
       </span>
       <span>
         | Helpful?
-        <span onClick={() => setCount(count + 1)}>
+        {' '}
+        <span onClick={handleYesClick}>
           Yes
+          {' '}
         </span>
         (
         {count}
@@ -42,6 +57,7 @@ const AnswerEntry = (props) => {
         |
       </span>
       <span onClick={handleReportClick}>
+        {' '}
         {report}
       </span>
       <div className="container-img">
@@ -49,7 +65,6 @@ const AnswerEntry = (props) => {
         <img className="answer-img" src={props.answer.photos[1]} alt="" />
         <img className="answer-img" src={props.answer.photos[2]} alt="" />
       </div>
-
     </div>
   );
 };

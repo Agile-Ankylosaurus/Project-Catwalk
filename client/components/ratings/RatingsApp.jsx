@@ -12,6 +12,6 @@ const RatingsApp = ({ metaData, reviews, setReviews }) => (
       <Reviews reviews={reviews} metaData={metaData} setReviews={setReviews} />
     </div>
   </div>
-);
+)};
 
 export default RatingsApp;

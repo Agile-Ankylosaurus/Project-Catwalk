@@ -18,13 +18,13 @@ const AnswersAccordion = (props) => {
   };
 
   return (
-    <div className="accordian-section">
-      <button className={`accordian ${active}`} type="submit" onClick={toggleAccordion}>
-        <div className="accordian-title">{list ? 'Collapse answers' : 'See more answers'}</div>
+    <div className="accordion-a-section">
+      <button className={`accordion-a ${active}`} type="submit" onClick={toggleAccordion}>
+        <div className="accordion-a-title">{list ? 'Collapse Answers' : 'See More Answers'}</div>
       </button>
-      <div style={{ maxHeight: `${height}` }} className="accordian-content">
+      <div style={{ maxHeight: `${height}` }} className="accordion-a-content">
         <div
-          className="accordian-text"
+          className="accordion-a-text"
         >
           {props.content}
         </div>
