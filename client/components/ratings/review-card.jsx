@@ -4,6 +4,8 @@ import StarRating from './StarRating';
 import ImageModal from './imageModal';
 
 const ReviewCard = ({ review }) => {
+  const [help, setHelp] = useState(false);
+  const [report, setReport] = useState('Report');
 
   // adding the recommend line if applicable
   const Recommend = () => {
@@ -26,12 +28,31 @@ const ReviewCard = ({ review }) => {
     return <></>;
   };
 
+  function handleYesClick() {
+    !help ? review.helpfulness++ : null;
+    setHelp(true);
+  }
+
+  function handleReportClick() {
+    report === 'Report' ? setReport('Reported') : null;
+  }
+
+  function correctDate(date) {
+    const temp = new Date(date).toLocaleDateString('en-gb', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    const array = temp.split(' ');
+    return `${array[1]} ${array[0]}, ${array[2]}`;
+  }
+
   // main render
   return (
     <div>
       <StarRating number={review.rating} uniqNum={review.date} />
       <span className="review-info">
-        {review.reviewer_name},  {moment(review.date).format('LL')}
+        {review.reviewer_name},  {correctDate(review.date)}
       </span>
       <div className="review-summary">{review.summary}</div>
       <div className="review-body">{review.body}</div>
@@ -41,9 +62,10 @@ const ReviewCard = ({ review }) => {
       ))}
       <Response />
       <div className="review-help">
-        Helpful? Yes (
-        {review.helpfulness}
-        )  |  Report
+        <span className="normal">Helpful?  </span>
+        <span className="clickable" onClick={handleYesClick}>Yes ({review.helpfulness})</span>
+        <span className="normal">  |  </span>
+        <span className="clickable" onClick={handleReportClick}>{report}</span>
       </div>
     </div>
   );

@@ -299,23 +299,17 @@ body {
   width: 30%;
   display: inline-block;
 }
+.reviews {
+  width: 65%;
+  display: inline;
+  float: right;
+}
 .ratings-title {
   width: 100%;
   text-transform: uppercase;
   font-size: 16px;
   display: inline-block;
 }
-.big-review-btn {
-  width: 150px;
-  height: 60px;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 10px;
-  margin: 10px;
-  cursor: pointer;
-}
-
 .overall-rating {
   float: left;
   height: 45px;
@@ -325,11 +319,6 @@ body {
 .percent-reviews{
   width: 100%;
   font-size: 15px;
-}
-.reviews {
-  width: 65%;
-  display: inline;
-  float: right;
 }
 .stars-rating {
   display: inline-block;
@@ -418,7 +407,7 @@ body {
   top: 2px;
 }
 .review-cards {
-  max-height: 1000px;
+  max-height: 800px;
   overflow-y: scroll;
 }
 .review-head {
@@ -446,8 +435,14 @@ body {
   max-width: 75px;
   height: auto;
   width: auto;
-  margin: 10px;
+  margin: 5px;
+  border: 1px solid #777;
+  border-radius: 5px;
+  padding: 5px;
   cursor: zoom-in;
+}
+.review-img-small:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 .review-img-large {
   max-height: 400px;
@@ -456,9 +451,20 @@ body {
   margin:5px;
   cursor: zoom-out;
 }
-.modal-content {
+.pic-modal-content {
   box-shadow: 0 8px 6px black;
   position: static;
+}
+.pic-modal-footer button {
+  display: block;
+  font-size: 18px;
+  margin-right: auto;
+  padding: 5px 15px;
+  background: #074b36;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 .review-response {
   font-size: 15px;
@@ -472,14 +478,105 @@ body {
   border-bottom: 2px solid #888;
   margin-bottom: 15px;
 }
-.modal-footer button {
-  display: block;
-  font-size: 1rem;
-  margin-right: auto;
-  padding: 0.5rem 1.8rem;
-  background: #074b36;
-  color: #fff;
-  border: none;
-  outline: none;
+.review-help .clickable {
+  text-decoration: underline;
+}
+.clickable:hover {
   cursor: pointer;
+}
+.big-review-btn {
+  width: 150px;
+  height: 60px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* ------------------------- Add Review Modal -----------------------------*/
+.add-modal {
+  /* display: none; */
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  top:0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.add-modal-content {
+  background-color: bisque;
+  margin: 20% auto;
+  padding: 20px;
+  width: 65%;
+  min-height: 300px;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgb(0, 0, 0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+@keyframes modalopen {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+.add-modal-header h1 {
+  text-align: center;
+  font-size: 24px;
+}
+.add-modal-header h3 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.new-review {
+  width: 65%;
+  float: left;
+}
+.close-modal-btn{
+  color: #000;
+  float: right;
+  font-size: 30px;
+  border: none;
+  background-color: bisque;
+}
+.radio-recommend {
+  float: right;
+  margin: 5px;
+  font-size: 12px;
+}
+.data-input {
+  margin: 5px;
+  font-size: 14px;
+  width: 30%;
+  text-align: end;
+}
+.input-box {
+  margin-right: 20px;
+  height: 15px;
+  width: 65%
+}
+.input-review {
+  margin-right: 20px;
+  height: 100px;
+  width: 100%
+}
+.new-review-sidebar {
+  width: 30%;
+  height: 100%;
+  float: right;
+}
+.star-meaning {
+  font-size: 12px;
+  text-align: start;
+}
+.radio-qual {
+  float: right;
+  margin: 5px;
+}
+.add-modal-footer {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import sampleObj from '../Sample_data/SampleMetadata';
+// import sampleObj from '../Sample_data/SampleMetadata';
 import StarRating from './StarRating';
 import StarGraph from './StarGraph';
 import Characteristics from './characteristics';
@@ -24,10 +24,8 @@ const Breakdown = ({ metaData }) => {
       results.weightedTotal += results.stars[i] * Number.parseInt(i);
     }
     if (results.totalReviews) {
-      results.weightedAvg = (Math.round(10 * (results.weightedTotal / results.totalReviews))) / 10;
-      results.pctOverall = Math.round(20 * (results.weightedTotal / results.totalReviews));
+      results.weightedAvg = Math.round(10 * (results.weightedTotal / results.totalReviews)) / 10;
     }
-    console.log(results.pctOverall);
 
     // save all the characteristics into the new obj
     results.characteristics = {};
@@ -36,8 +34,7 @@ const Breakdown = ({ metaData }) => {
     }
     return results;
   }
-  // console.log(props);
-  var goodData = transformData(metaData);
+  const goodData = transformData(metaData);
 
   return (
     <div>
