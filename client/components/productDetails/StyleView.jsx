@@ -6,24 +6,23 @@ const StyleView = (props) => {
   return (
     <div>
       {styles.map((style, idx) => {
-        // console.log(idx === currentStyle ? 'true hide' : 'false hide')
         const styleButton = (
           <button
             type="button"
             onClick={handleStyleClick}
             className="styleButton"
-            key={`button${style.style_id}`}
+            key={`button${style.style_id}${idx}`}
           >
             <img
               id={style.style_id}
               styleidx={idx}
               alt={style.name + product.name}
               src={style.photos[0].thumbnail_url}
-              className={idx === selectedStyle ? 'selectedStyle' : 'styleThumbnail '}
-              key={`img${style.style_id}`}
+              className={idx === selectedStyle ? 'selectedStyle styleThumbnail' : 'styleThumbnail '}
+              key={`img${style.style_id}${idx}`}
             />
             <img
-              key={`check${style.style_id}`}
+              key={`check${style.style_id}${idx}`}
               src="./img/checkmark.png"
               className={idx === selectedStyle ? 'ShowEle checkmark' : 'hiddenEle '}
             />
