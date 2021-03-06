@@ -24,14 +24,14 @@ const QuestionsAccordion = (props) => {
   );
 
   return (
-    <div className="accordian-q-section">
-      <button className={`accordian-q ${activeQ}`} type="submit" onClick={toggleAccordionQ}>
-        <span className="accordian-q-title">{title ? 'Show Less Questions' : 'More Answered Questions'}</span>
+    <div className="accordion-q-section">
+      <button className={`accordion-q ${activeQ}`} type="submit" onClick={toggleAccordionQ}>
+        <span className="accordion-q-title">{title ? 'Show Less Questions' : 'More Answered Questions'}</span>
         <Chevron />
       </button>
-      <div style={{ maxHeight: `${heightQ}` }} ref={listHeight} className="accordian-q-content">
+      <div style={{ maxHeight: `${heightQ}` }} ref={listHeight} className="accordion-q-content">
         <div
-          className="accordian-q-text"
+          className="accordion-q-text"
         >
           {props.contentQ}
         </div>

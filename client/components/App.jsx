@@ -135,6 +135,8 @@ const App = () => {
 
   useState(getOneProduct);
 
+  console.log(product);
+
   return (
     <div className="">
       <div className="gridContainer gridMainTemplate">

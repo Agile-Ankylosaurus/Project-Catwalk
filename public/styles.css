@@ -234,15 +234,15 @@ body {
   border-radius: 5px;
   height: 25px;
   width: 100%;
-  padding: 2px 30px 2px 5px;
+  padding: 20px 10px 20px 20px;
   outline: 0;
   background-color: whitesmoke;
 }
 
 .search-icon {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 15px;
+  right: 15px;
   width: 14px;
 }
 
@@ -262,12 +262,12 @@ body {
   width: auto;
 }
 
-.accordion-section {
+.accordion-a-section {
   display: flex;
   flex-direction: column;
 }
 
-.accordion {
+.accordion-a {
   background-color: transparent;
   background-repeat: no-repeat;
   overflow: hidden;
@@ -278,18 +278,16 @@ body {
   border: none;
   outline: none;
   transition: background-color 0.6s ease;
+  margin-right: auto;
 }
 
-.accordion:hover,
+.accordion-a:hover,
 .active {
   background-color: #ccc;
 }
 
-.accordian-content {
+.accordion-a-content {
   overflow: scroll;
-<<<<<<< HEAD
-  transition: max-height 0.6s ease;
-=======
   transition: max-height 0.6s ease; 
   background-color: whitesmoke;
 }
@@ -304,12 +302,16 @@ body {
   color: #444;
   overflow: hidden;
   cursor: pointer; 
-  padding: 18px;
   display: flex;
-  align-items: center;
-  border: none;
-  outline: none;
   transition: background-color 0.6s ease;
+  margin-right: auto;
+  width: 200px;
+  height: 60px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
 }
 
 .accordion-q:hover, 
@@ -317,7 +319,7 @@ body {
   background-color: #ccc;
 }
 
-.accordian-q-content {
+.accordion-q-content {
   overflow: scroll;
   transition: max-height 0.6s ease; 
   /* display: flex;
@@ -325,6 +327,27 @@ body {
   bottom: 0px;
   background-color: white;  */
 }
+
+.accordion-a-title {
+  width: 150px;
+  height: 10px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 
+.accordion-q-title {
+  width: 150px;
+  height: 10px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+} */
 
 .chevron {
   margin-left: auto;
@@ -334,9 +357,55 @@ body {
 
 .chevron-rotate {
   transform: rotate(90deg);
->>>>>>> questions accordion done and fixed count issue
+  margin-left: auto;
+  float: right;
 }
 
+.modal-a, .modal-q {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-a-content, .modal-q-content {
+  width: 500px; 
+  background-color: whitesmoke;
+}
+
+.modal-a-header, .modal-q-header {
+  padding: 10px; 
+}
+
+.modal-a-footer, .modal-q-footer {
+  padding: 10px; 
+}
+
+.modal-a-title, .modal-q-title {
+  margin: 0;
+}
+
+.modal-a-body, .modal-q-body {
+  padding: 10px;
+  border-top: 1px solid whitesmoke;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.add-question {
+  width: 200px;
+  height: 60px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
 
 
 
