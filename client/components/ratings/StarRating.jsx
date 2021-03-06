@@ -13,13 +13,12 @@ const StarRating = ({ number, uniqNum }) => (
         );
       }
       if ( (number - index) < 1 && (number - index) > 0 ) {
-        const pctOn = 100 * (number - index);
-        const pctOff = 100 - pctOn;
+        const pctOn = Math.round(100 * (number - index));
         return (
           <span
             key={uniqNum + index}
             className="star-shape"
-            style={{ background: `linear-gradient(90deg, #074b36 ${pctOn}%, #aaa ${pctOff}%` }}
+            style={{ background: `linear-gradient(90deg, #074b36 ${pctOn}%, #aaa ${pctOn}%` }}
           />
         );
       }

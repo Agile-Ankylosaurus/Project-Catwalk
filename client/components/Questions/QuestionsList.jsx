@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import QuestionEntry from './QuestionEntry';
 import QuestionsAccordion from './QuestionsAccordion';
-import QuestionsData from '../Sample_Data/QuestionsData';
+import QuestionsModal from './QuestionsModal';
 
 const QuestionsList = (props) => {
   // console.log('hardcode data', QuestionsData.results);
   // console.log('api data', props.questions);
   const data = props.questions;
-
   // const [data, setData] = useState([]); // props.questions
   const [display, setDisplay] = useState(false);
   const [filtered, setFiltered] = useState([]);
+  const [showQ, setShowQ] = useState(false);
+  const restOfQuestions = data.slice(2, data.length);
+
   data.sort((a, b) => (
     b.question_helpfulness - a.question_helpfulness));
   const firstFour = data.slice(0, 2);
-  // setData(questionHelpfulSort);
-  // console.log('sorted', questionHelpfulSort);
 
   // React.useEffect(() => {
   //   setData(props.questions);
@@ -34,8 +34,24 @@ const QuestionsList = (props) => {
     }
   };
   // console.log(data);
-  const restOfQuestions = data.slice(2, data.length);
+  // const restOfQuestions = data.slice(2, data.length);
   // console.log(restOfQuestions);
+
+  // const MoreQuestions = () => {
+  //   if (data.length > 4) {
+  //     return (
+  //       <div>
+  //         <QuestionsAccordion
+  //           titleQ="More Answered Questions"
+  //           contentQ={restOfQuestions.map(
+  //             (question) => <QuestionEntry key={question.question_id} question={question} />,
+  //           )}
+  //         />
+  //       </div>
+  //     );
+  //   }
+  //   return <></>;
+  // };
 
   const MoreQuestions = () => {
     if (data.length > 4) {
@@ -70,7 +86,8 @@ const QuestionsList = (props) => {
       </div>
       <MoreQuestions />
       <div>
-        <input className="add-question" type="submit" value="Add A Question +" />
+        <input className="add-question" type="submit" value="Add A Question +" onClick={() => setShowQ(true)} />
+        <QuestionsModal showQ={showQ} onCloseQues={() => setShowQ(false)} />
       </div>
     </div>
   );

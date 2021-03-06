@@ -67,11 +67,11 @@ const App = () => {
       result = `201${result.toString()}`;
       return result;
     };
-    // const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}`;
-    // console.log(randomProductUrl);
+    const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}`;
+    console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(targetedProductURL, {
+    axios.get(randomProductUrl, {
       headers: {
         Authorization: TOKEN,
       },
@@ -82,9 +82,9 @@ const App = () => {
       .then((productRes) => {
         // console.log(productRes.data[0]);
         setProduct(productRes.data);
-        console.log('productRes.data:', productRes.data)
+        console.log('product', productRes.data)
         // get the styles data from the default product id
-        axios.get(`${targetedProductURL}/styles`, {
+        axios.get(`${randomProductUrl}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
@@ -92,22 +92,23 @@ const App = () => {
           .then((styleRes) => {
             // console.log(styleRes);
             setStyles(styleRes.data.results);
-            console.log('styleRes:', styleRes.data.results)
+            console.log('style res', styleRes.data.results)
             // get the reviews meta data from the default product id
             // console.log(styleRes.data)
-            axios.get(`${url}reviews/meta?product_id=${styleRes.data.product_id}`, {
+            axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
               headers: {
                 Authorization: TOKEN,
               },
             })
               .then((ratingMeta) => {
+                console.log(ratingMeta.data)
                 // console.log(ratingMeta.data);
                 const metaData = ratingMeta.data;
                 const totalReviews = parseInt(metaData.recommended.false, 10)
                                  + parseInt(metaData.recommended.true, 10);
                 setMeta(metaData);
                 // get all reviews for the default product id
-                axios.get(`${url}reviews/?product_id=${styleRes.data.product_id}&count=${totalReviews}`, {
+                axios.get(`${url}reviews/?product_id=${productRes.data.id}&count=${totalReviews}`, {
                   headers: {
                     Authorization: TOKEN,
                   },
@@ -115,7 +116,7 @@ const App = () => {
                   .then((reviews) => {
                     setReviews(reviews.data.results);
                     // get questions for q&a
-                    axios.get(`${url}qa/questions/?product_id=${styleRes.data.product_id}`, {
+                    axios.get(`${url}qa/questions/?product_id=${productRes.data.id}`, {
                       headers: {
                         Authorization: TOKEN,
                       },
