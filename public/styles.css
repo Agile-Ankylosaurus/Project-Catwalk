@@ -194,7 +194,7 @@ body {
   background-color: rgba(128, 125, 125, 0.76);
   border-radius: 2em;
   top: 45%;
-  /* left: 750px; */
+  left: 740px;
   width: 50px;
 }
 
@@ -204,8 +204,16 @@ body {
   border-radius: 2em;
   width: 50px;
   top: 45%;
-  left: 0px;
+  left: 80px;
   transform: rotate(180deg);
+}
+
+.mainImgThumbnail {
+  position: absolute;
+  border: 3px black solid;
+  width: 65px;
+  height: 65px;
+  left: 10px;
 }
 
 /*product details*/

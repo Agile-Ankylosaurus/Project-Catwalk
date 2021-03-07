@@ -84,7 +84,7 @@ const App = () => {
     console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(randomProductUrl, {
+    axios.get(targetedProductURL, {
       headers: {
         Authorization: TOKEN,
       },
@@ -98,7 +98,7 @@ const App = () => {
         console.log('product', productRes.data)
         // get the styles data from the default product id
         // axios.get(`${randomProductUrl}/styles`, {
-        axios.get(`${randomProductUrl}/styles`, {
+        axios.get(`${targetedProductURL}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
@@ -106,7 +106,7 @@ const App = () => {
           .then((styleRes) => {
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
-            // console.log(styleRes.data)
+            console.log(styleRes.data)
             axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
               headers: {
                 Authorization: TOKEN,
