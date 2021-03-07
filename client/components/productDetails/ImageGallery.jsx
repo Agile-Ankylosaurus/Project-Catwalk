@@ -7,12 +7,18 @@ const ImageGallery = (props) => {
     selectedStyle,
     imgView,
     handleArrowClick,
+    handleImgThumbnailClick,
   } = props;
 
 
   return (
     <div id="imgSlider">
-      <div className="imgContainer" style={{ left: imgView * -800 }}>
+      <div
+        className="imgContainer"
+        style={
+          { left: imgView * -800, width: styles[selectedStyle].photos.length * 800 }
+        }
+      >
         {styles[selectedStyle].photos.map((photo) => (
           <img
             src={photo.url}
@@ -45,47 +51,25 @@ const ImageGallery = (props) => {
           // style={{ left: 750 }}
         />
       </button>
-      {/* <button
-        type="button"
-        onClick=""
-      >
-        <img
-          src={styles[selectedStyle].photos[0].thumbnail_url}
-          alt={styles[selectedStyle].photos[0].thumbnail_url}
-          value=""
-          className="mainImgThumbnail"
-          style={{ top: 50 }}
-        />
-      </button>
-      <button
-        type="button"
-        onClick=""
-      >
-        <img
-          src={styles[selectedStyle].photos[1].thumbnail_url}
-          alt={styles[selectedStyle].photos[1].thumbnail_url}
-          value=""
-          className="mainImgThumbnail"
-          style={{ top: 120 }}
-        />
-      </button> */}
-
-      {styles[selectedStyle].photos.map((photo, idx) => (
-        <button
-          type="button"
-          onClick=""
-          key={`thumbnail${photo.thumbnail_url}`}
-        >
-          <img
-            src={photo.thumbnail_url}
-            alt={photo.thumbnail_url}
-            key={photo.thumbnail_url}
-            value=""
-            className="mainImgThumbnail"
-            style={{ top: idx * 75 + 50 }}
-          />
-        </button>
-      ))}
+      <div className="mainImgThumbnailContainer">
+        {styles[selectedStyle].photos.map((photo, idx) => (
+          <button
+            type="button"
+            onClick={handleImgThumbnailClick}
+            key={`thumbnail${photo.thumbnail_url}`}
+            className="mainImgThumbnailButton"
+            style={{ top: idx * 75 }}
+          >
+            <img
+              src={photo.thumbnail_url}
+              alt={photo.thumbnail_url}
+              key={photo.thumbnail_url}
+              value={idx}
+              className={imgView === idx ? 'mainImgThumbnail highlight' : 'mainImgThumbnail'}
+            />
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

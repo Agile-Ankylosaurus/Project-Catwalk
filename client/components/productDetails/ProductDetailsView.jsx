@@ -10,6 +10,7 @@ const ProductDetailsView = (props) => {
     imgView,
     handleStyleClick,
     handleArrowClick,
+    handleImgThumbnailClick,
   } = props;
 
   // console.log(product, styles, selectedStyle);
@@ -24,6 +25,7 @@ const ProductDetailsView = (props) => {
           selectedStyle={selectedStyle}
           imgView={imgView}
           handleArrowClick={handleArrowClick}
+          handleImgThumbnailClick={handleImgThumbnailClick}
         />
         <ProductDetails
           product={product}

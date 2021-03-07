@@ -178,15 +178,14 @@ body {
 }
 
 .imgContainer {
-  width: 4800px;
   background-color: pink;
   height: 700px;
   clear: both;
   position: relative;
   -webkit-transition: left 2s;
-        -moz-transition: left 2s;
-        -o-transition: left 2s;
-        transition: left 2s;
+  -moz-transition: left 2s;
+  -o-transition: left 2s;
+  transition: left 2s;
 }
 
 .rightArrow {
@@ -208,12 +207,40 @@ body {
   transform: rotate(180deg);
 }
 
-.mainImgThumbnail {
+.mainImgThumbnailContainer {
   position: absolute;
-  border: 3px black solid;
+  width: 80px;
+  top: 50px;
+  height: 520px;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.mainImgThumbnailButton {
+  position: absolute;
+  /* border: 3px black solid; */
   width: 65px;
   height: 65px;
-  left: 10px;
+  left: 5px;
+  background-color: transparent;
+  outline: none;
+}
+
+.mainImgThumbnail {
+  /* position: absolute; */
+  /* border: 3px black solid; */
+  width: 65px;
+  height: 65px;
+  /* left: 10px; */
+  /* filter: grayscale(100%); */
+}
+
+.noGrayscale {
+  filter: grayscale(0%);
+}
+
+.highlight {
+  border: 3px gold solid;
 }
 
 /*product details*/

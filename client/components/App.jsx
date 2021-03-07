@@ -49,6 +49,11 @@ const App = () => {
   const [imgView, setImgView] = useState(0);
 
   // functions
+  const handleImgThumbnailClick = (e) => {
+    const targetValueToNum = parseInt(e.target.attributes.value.value, 10);
+    setImgView(parseInt(targetValueToNum), 10);
+  };
+
   const handleArrowClick = (e) => {
     const direction = e.target.attributes.value.value;
     const photoMax = styles[selectedStyle].photos.length - 1;
@@ -59,15 +64,15 @@ const App = () => {
     if (direction === 'right') {
       setImgView(imgView === photoMax ? photoMax : imgView + 1);
     }
-
   };
+
   const handleStyleClick = (e) => {
     setSelectedStyle(parseInt(e.target.attributes.styleidx.value), 10);
   };
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20103';
+    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
@@ -178,6 +183,7 @@ const App = () => {
           imgView={imgView}
           handleStyleClick={handleStyleClick}
           handleArrowClick={handleArrowClick}
+          handleImgThumbnailClick={handleImgThumbnailClick}
         />
         <div className="gridSpacer" />
         <div className="gridSpacer" />
