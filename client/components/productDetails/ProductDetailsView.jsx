@@ -7,7 +7,9 @@ const ProductDetailsView = (props) => {
     product,
     styles,
     selectedStyle,
-    handleStyleClick
+    imgView,
+    handleStyleClick,
+    handleArrowClick,
   } = props;
 
   // console.log(product, styles, selectedStyle);
@@ -20,6 +22,8 @@ const ProductDetailsView = (props) => {
           product={product}
           styles={styles}
           selectedStyle={selectedStyle}
+          imgView={imgView}
+          handleArrowClick={handleArrowClick}
         />
         <ProductDetails
           product={product}

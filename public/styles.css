@@ -158,6 +158,7 @@ body {
 /* img normal view */
 
 #imgSlider {
+  position: relative;
   width: 800px;
   background-color: yellow;
   height: 700px;
@@ -177,14 +178,35 @@ body {
 }
 
 .imgContainer {
-  width: 5600px;
+  width: 4800px;
   background-color: pink;
   height: 700px;
   clear: both;
   position: relative;
+  -webkit-transition: left 2s;
+        -moz-transition: left 2s;
+        -o-transition: left 2s;
+        transition: left 2s;
 }
 
+.rightArrow {
+  position: absolute;
+  background-color: rgba(128, 125, 125, 0.76);
+  border-radius: 2em;
+  top: 45%;
+  /* left: 750px; */
+  width: 50px;
+}
 
+.leftArrow {
+  position: absolute;
+  background-color: rgba(128, 125, 125, 0.76);
+  border-radius: 2em;
+  width: 50px;
+  top: 45%;
+  left: 0px;
+  transform: rotate(180deg);
+}
 
 /*product details*/
 

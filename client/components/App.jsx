@@ -46,8 +46,21 @@ const App = () => {
   });
   const [reviews, setReviews] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [imgView, setImgView] = useState(0);
 
   // functions
+  const handleArrowClick = (e) => {
+    const direction = e.target.attributes.value.value;
+    const photoMax = styles[selectedStyle].photos.length - 1;
+    setImgView(imgView + 1);
+    if (direction === 'left') {
+      setImgView(imgView === 0 ? 0 : imgView - 1);
+    }
+    if (direction === 'right') {
+      setImgView(imgView === photoMax ? photoMax : imgView + 1);
+    }
+
+  };
   const handleStyleClick = (e) => {
     setSelectedStyle(parseInt(e.target.attributes.styleidx.value), 10);
   };
@@ -84,15 +97,14 @@ const App = () => {
         setProduct(productRes.data);
         console.log('product', productRes.data)
         // get the styles data from the default product id
+        // axios.get(`${randomProductUrl}/styles`, {
         axios.get(`${randomProductUrl}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
         })
           .then((styleRes) => {
-            // console.log(styleRes);
             setStyles(styleRes.data.results);
-            console.log('style res', styleRes.data.results)
             // get the reviews meta data from the default product id
             // console.log(styleRes.data)
             axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
@@ -101,7 +113,6 @@ const App = () => {
               },
             })
               .then((ratingMeta) => {
-                console.log(ratingMeta.data)
                 // console.log(ratingMeta.data);
                 const metaData = ratingMeta.data;
                 const totalReviews = parseInt(metaData.recommended.false, 10)
@@ -164,7 +175,9 @@ const App = () => {
           product={product}
           styles={styles}
           selectedStyle={selectedStyle}
+          imgView={imgView}
           handleStyleClick={handleStyleClick}
+          handleArrowClick={handleArrowClick}
         />
         <div className="gridSpacer" />
         <div className="gridSpacer" />

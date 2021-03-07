@@ -27,14 +27,6 @@ const ProductDetails = (props) => {
   const sizeChangeHandler = (e) => {
     arrMaker(styles[selectedStyle].skus[e.target.value].quantity);
     setSKU(e.target.value);
-    // console.log(styles[selectedStyle].skus[e.target.value].quantity);
-    // setQty(styles[selectedStyle].skus[e.target.value].quantity);
-    // setSize(styles[selectedStyle].skus[e.target.value].size);
-    // if (styles[selectedStyle].skus[e.target.value].quantity > 15) {
-    //   arr = new Array(15);
-    // } else {
-    //   arr = new Array(styles[selectedStyle].skus[e.target.value].quantity);
-    // }
   };
 
   // useEffect(() => {
