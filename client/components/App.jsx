@@ -89,7 +89,7 @@ const App = () => {
     console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(targetedProductURL, {
+    axios.get(randomProductUrl, {
       headers: {
         Authorization: TOKEN,
       },
@@ -103,7 +103,7 @@ const App = () => {
         console.log('product', productRes.data)
         // get the styles data from the default product id
         // axios.get(`${randomProductUrl}/styles`, {
-        axios.get(`${targetedProductURL}/styles`, {
+        axios.get(`${randomProductUrl}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
