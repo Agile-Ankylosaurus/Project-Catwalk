@@ -68,8 +68,6 @@ const App = () => {
 
   const handleArrowClick = (e) => {
     const direction = e.target.attributes.value.value;
-    console.dir(e.target);
-    console.log(e.target.attributes[3].value);
     const updatedImgView = parseInt(e.target.attributes[3].value, 10);
     const photoMax = styles[selectedStyle].photos.length - 1;
     const arr = selectedStyleImgMemory;
@@ -93,7 +91,7 @@ const App = () => {
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20103';
+    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
