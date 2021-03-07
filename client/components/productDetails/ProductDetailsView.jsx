@@ -7,6 +7,7 @@ const ProductDetailsView = (props) => {
     product,
     styles,
     selectedStyle,
+    selectedStyleImgMemory,
     imgView,
     handleStyleClick,
     handleArrowClick,
@@ -23,6 +24,7 @@ const ProductDetailsView = (props) => {
           product={product}
           styles={styles}
           selectedStyle={selectedStyle}
+          selectedStyleImgMemory={selectedStyleImgMemory}
           imgView={imgView}
           handleArrowClick={handleArrowClick}
           handleImgThumbnailClick={handleImgThumbnailClick}

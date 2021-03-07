@@ -47,32 +47,53 @@ const App = () => {
   const [reviews, setReviews] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [imgView, setImgView] = useState(0);
+  const [selectedStyleImgMemory, setSelectedStyleImgMemory] = useState([]);
 
   // functions
+  const styleMemArrMaker = (numOfStyles) => {
+    const arr = [];
+    for (let i = 0; i < numOfStyles; i += 1) {
+      arr.push(0);
+    }
+    return arr;
+  };
+
   const handleImgThumbnailClick = (e) => {
-    const targetValueToNum = parseInt(e.target.attributes.value.value, 10);
-    setImgView(parseInt(targetValueToNum), 10);
+    const thumbnailViewIdx = parseInt(e.target.attributes.value.value, 10);
+    const arr = selectedStyleImgMemory;
+    arr[selectedStyle] = thumbnailViewIdx;
+    setImgView(thumbnailViewIdx);
+    setSelectedStyleImgMemory(arr);
   };
 
   const handleArrowClick = (e) => {
     const direction = e.target.attributes.value.value;
+    console.dir(e.target);
+    console.log(e.target.attributes[3].value);
+    const updatedImgView = parseInt(e.target.attributes[3].value, 10);
     const photoMax = styles[selectedStyle].photos.length - 1;
-    setImgView(imgView + 1);
+    const arr = selectedStyleImgMemory;
+
     if (direction === 'left') {
+      arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView - 1;
+      setSelectedStyleImgMemory(arr);
       setImgView(imgView === 0 ? 0 : imgView - 1);
     }
     if (direction === 'right') {
+      arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView + 1;
+      setSelectedStyleImgMemory(arr);
       setImgView(imgView === photoMax ? photoMax : imgView + 1);
     }
   };
 
   const handleStyleClick = (e) => {
-    setSelectedStyle(parseInt(e.target.attributes.styleidx.value), 10);
+    setSelectedStyle(parseInt(e.target.attributes.styleidx.value, 10));
+    setImgView(selectedStyleImgMemory[parseInt(e.target.attributes.styleidx.value, 10)]);
   };
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
+    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20103';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
@@ -89,7 +110,7 @@ const App = () => {
     console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(randomProductUrl, {
+    axios.get(targetedProductURL, {
       headers: {
         Authorization: TOKEN,
       },
@@ -98,20 +119,19 @@ const App = () => {
       },
     })
       .then((productRes) => {
-        // console.log(productRes.data[0]);
         setProduct(productRes.data);
-        console.log('product', productRes.data)
         // get the styles data from the default product id
         // axios.get(`${randomProductUrl}/styles`, {
-        axios.get(`${randomProductUrl}/styles`, {
+        axios.get(`${targetedProductURL}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
         })
           .then((styleRes) => {
+            setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.results.length));
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
-            console.log(styleRes.data)
+            console.log('style', styles);
             axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
               headers: {
                 Authorization: TOKEN,
@@ -180,6 +200,7 @@ const App = () => {
           product={product}
           styles={styles}
           selectedStyle={selectedStyle}
+          selectedStyleImgMemory={selectedStyleImgMemory}
           imgView={imgView}
           handleStyleClick={handleStyleClick}
           handleArrowClick={handleArrowClick}

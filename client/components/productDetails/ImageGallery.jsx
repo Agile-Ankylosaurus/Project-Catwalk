@@ -5,11 +5,12 @@ const ImageGallery = (props) => {
     product,
     styles,
     selectedStyle,
+    selectedStyleImgMemory,
     imgView,
     handleArrowClick,
     handleImgThumbnailClick,
   } = props;
-
+// console.log(styles)
 
   return (
     <div id="imgSlider">
@@ -36,6 +37,7 @@ const ImageGallery = (props) => {
           src="./img/arrow.png"
           alt="arrow.png"
           value="left"
+          imgViewValue={imgView}
           className="leftArrow"
         />
       </button>
@@ -47,6 +49,7 @@ const ImageGallery = (props) => {
           src="./img/arrow.png"
           alt="arrow.png"
           value="right"
+          imgViewValue={imgView}
           className="rightArrow"
           // style={{ left: 750 }}
         />
