@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ImageGallery = ({props}) => {
+const ImageGallery = (props) => {
   const {
     product,
     styles,
