@@ -218,7 +218,7 @@ body {
 
 .mainImgThumbnailButton {
   position: absolute;
-  /* border: 3px black solid; */
+  border: none;
   width: 65px;
   height: 65px;
   left: 5px;
@@ -419,15 +419,7 @@ body {
 .accordion-a-content {
   overflow: scroll;
   transition: max-height 0.6s ease;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-  transition: max-height 0.6s ease;
-=======
-  transition: max-height 0.6s ease;
   background-color: whitesmoke;
-=======
->>>>>>> master
 }
 
 .accordion-q-section {
@@ -440,10 +432,6 @@ body {
   color: #444;
   overflow: hidden;
   cursor: pointer;
-<<<<<<< HEAD
-  padding: 18px;
-=======
->>>>>>> master
   display: flex;
   transition: background-color 0.6s ease;
   margin-right: auto;
@@ -478,11 +466,6 @@ body {
 
 .chevron-rotate {
   transform: rotate(90deg);
-<<<<<<< HEAD
->>>>>>> questions accordion done and fixed count issue
->>>>>>> master
-=======
->>>>>>> master
 }
 
 .accordion-q:hover,

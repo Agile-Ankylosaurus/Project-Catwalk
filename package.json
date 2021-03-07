@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Front End Capstone",
   "scripts": {
-    "start": "nodemon server",
+    "start": "nodemon server index.js",
     "test": "jest",
     "build": "webpack",
     "watch": "webpack -w"
