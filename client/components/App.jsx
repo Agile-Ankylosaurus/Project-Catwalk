@@ -236,6 +236,7 @@ const App = () => {
         <ProductDetailsView
           product={product}
           styles={styles}
+          overallRating={overallRating}
           selectedStyle={selectedStyle}
           selectedStyleImgMemory={selectedStyleImgMemory}
           imgView={imgView}

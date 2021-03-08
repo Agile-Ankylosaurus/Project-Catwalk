@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import StyleView from './StyleView';
+import StarRating from '../ratings/StarRating';
 
 const ProductDetails = (props) => {
-  const {product, styles, selectedStyle, handleStyleClick} = props;
+  const {
+    product,
+    styles,
+    overallRating,
+    selectedStyle,
+    handleStyleClick,
+  } = props;
   // const [size, setSize] = useState('');
   // const [qty, setQty] = useState(0);
   const [SKU, setSKU] = useState(0);
@@ -35,7 +42,9 @@ const ProductDetails = (props) => {
   return (
     <div id="productView">
       {/* {console.log(arr)} */}
-      <div className="ratingsComponent">ratings component</div>
+      <div className="ratingsComponent">
+        <StarRating number={overallRating} />
+      </div>
       {/* {console.log('this is product', product)} */}
       <span className="paddingTop15px">{product.category}</span>
       <h1 className="">{styles[selectedStyle].name} {product.name}</h1>

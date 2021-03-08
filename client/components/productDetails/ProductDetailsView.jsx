@@ -6,6 +6,7 @@ const ProductDetailsView = (props) => {
   const {
     product,
     styles,
+    overallRating,
     selectedStyle,
     selectedStyleImgMemory,
     imgView,
@@ -34,6 +35,7 @@ const ProductDetailsView = (props) => {
         <ProductDetails
           product={product}
           styles={styles}
+          overallRating={overallRating}
           selectedStyle={selectedStyle}
           handleStyleClick={handleStyleClick}
         />
