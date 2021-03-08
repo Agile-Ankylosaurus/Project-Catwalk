@@ -15,8 +15,17 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
   function handleSortChange(e) {
     const sort = e.target.value;
+    const dataObj = {
+      id: metaData.product_id,
+      num: reviews.length,
+      sort: sort,
+    };
     if (sort !== sortOrder) {
       setSort(sort);
+      console.log(dataObj);
+      axios.get('/reviews/sort', { params: {dataObj} })
+        .then((resData) => console.log('success', resData))
+        .catch((err) => console.log('error in the post', err));
       axios.get(`${url}reviews/?product_id=${metaData.product_id}&count=${reviews.length}&sort=${sort}`, {
         headers: {
           Authorization: TOKEN,

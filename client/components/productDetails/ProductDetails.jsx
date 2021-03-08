@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import StyleView from './StyleView.jsx';
+import StyleView from './StyleView';
 
 const ProductDetails = (props) => {
-  const { product, styles, selectedStyle, handleStyleClick} = props;
+  const {product, styles, selectedStyle, handleStyleClick} = props;
   // const [size, setSize] = useState('');
   // const [qty, setQty] = useState(0);
   const [SKU, setSKU] = useState(0);

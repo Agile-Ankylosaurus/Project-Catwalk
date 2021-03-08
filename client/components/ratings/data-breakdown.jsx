@@ -10,8 +10,8 @@ const Breakdown = ({ metaData }) => {
     const results = {};
 
     // find the percentage of recommends
-    const recommend = parseInt(dataObj.recommended.true, 10);
-    const notRecommend = parseInt(dataObj.recommended.false, 10);
+    const recommend = parseInt(dataObj.recommended.true, 10) || 0;
+    const notRecommend = parseInt(dataObj.recommended.false, 10) || 0;
     results.pctRecommend = Math.round(100 * (recommend / (recommend + notRecommend)));
 
     // find the number of each star rating and the weighted average
@@ -26,7 +26,6 @@ const Breakdown = ({ metaData }) => {
     if (results.totalReviews) {
       results.weightedAvg = Math.round(10 * (results.weightedTotal / results.totalReviews)) / 10;
     }
-    // console.log(results.pctOverall);
 
     // save all the characteristics into the new obj
     results.characteristics = {};

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import moment from 'moment';
+import axios from 'axios';
 import StarRating from './StarRating';
 import ImageModal from './imageModal';
 
@@ -10,7 +10,15 @@ const ReviewCard = ({ review }) => {
   // adding the recommend line if applicable
   const Recommend = () => {
     if (review.recommend) {
-      return <div className="review-body">I recommend this item.</div>;
+      return (
+        <div>
+          <img
+            src="./img/checkmark.png" className="featureCheckmark"
+            alt="checkmark"
+            />
+          <span className="review-body">I recommend this item.</span>
+        </div>
+      );
     }
     return <></>;
   };
@@ -28,13 +36,23 @@ const ReviewCard = ({ review }) => {
     return <></>;
   };
 
+  // incrementing the helpful counter on the review
   function handleYesClick() {
-    !help ? review.helpfulness++ : null;
-    setHelp(true);
+    if (!help) {
+      review.helpfulness += 1;
+      axios.put('/reviews/help', {id: review.review_id})
+        .then(() => setHelp(true))
+        .catch((err) => console.log('error in the post', err));
+    }
   }
 
+  // reporting the review will remove it from the database
   function handleReportClick() {
-    report === 'Report' ? setReport('Reported') : null;
+    if (report === 'Report') {
+      axios.put('/reviews/report', {id: review.review_id})
+        .then(() => setReport('Reported'))
+        .catch((err) => console.log('error in the post', err));
+    }
   }
 
   function correctDate(date) {

@@ -13,7 +13,7 @@
 
 //   // it('renders QuestionsList component', () => {
 //   //   const { findByText } = render(<QuestionsList />);
-    
+
 //   //   expect(findByText('Questions & Answers').toBeInTheDocument());
 //   // });
 // });

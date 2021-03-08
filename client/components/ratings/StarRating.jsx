@@ -12,7 +12,7 @@ const StarRating = ({ number, uniqNum }) => (
           />
         );
       }
-      if ( (number - index) < 1 && (number - index) > 0 ) {
+      if ((number - index) < 1 && (number - index) > 0) {
         const pctOn = Math.round(100 * (number - index));
         return (
           <span
@@ -30,6 +30,6 @@ const StarRating = ({ number, uniqNum }) => (
       );
     })}
   </span>
-)
+);
 
 export default StarRating;

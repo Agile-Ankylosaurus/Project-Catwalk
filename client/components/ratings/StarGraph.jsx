@@ -3,8 +3,8 @@ import React from 'react';
 const StarGraph = ({ stars, reviews }) => {
   const percent = {};
 
-  for (const key in stars) {
-    percent[key] = Math.round(100 * stars[key] / reviews);
+  for (let i = 1; i < 6; i += 1) {
+    percent[i] = Math.round(100 * (stars[i] / reviews)) || 0;
   }
 
   return (
@@ -27,7 +27,7 @@ const StarGraph = ({ stars, reviews }) => {
         <p>3 Stars</p>
         <p>{stars[3]}</p>
         <div className="starbar">
-          <div className="starbar-level" style={{ width: `${percent[3]}%`}} />
+          <div className="starbar-level" style={{ width: `${percent[3]}%` }} />
         </div>
       </div>
       <div className="starBox">
