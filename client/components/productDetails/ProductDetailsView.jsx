@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductDetails from './ProductDetails.jsx';
+import ProductDetails from './ProductDetails';
 import ImageGallery from './ImageGallery';
 
 const ProductDetailsView = (props) => {
@@ -9,6 +9,7 @@ const ProductDetailsView = (props) => {
     selectedStyle,
     selectedStyleImgMemory,
     imgView,
+    thumbnailView,
     handleStyleClick,
     handleArrowClick,
     handleImgThumbnailClick,
@@ -26,6 +27,7 @@ const ProductDetailsView = (props) => {
           selectedStyle={selectedStyle}
           selectedStyleImgMemory={selectedStyleImgMemory}
           imgView={imgView}
+          thumbnailView={thumbnailView}
           handleArrowClick={handleArrowClick}
           handleImgThumbnailClick={handleImgThumbnailClick}
         />

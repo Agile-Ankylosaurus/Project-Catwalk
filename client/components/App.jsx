@@ -47,6 +47,7 @@ const App = () => {
   const [reviews, setReviews] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [imgView, setImgView] = useState(0);
+  const [thumbnailView, setThumbnailView] = useState(0);
   const [selectedStyleImgMemory, setSelectedStyleImgMemory] = useState([]);
 
   // functions
@@ -69,6 +70,7 @@ const App = () => {
   const handleArrowClick = (e) => {
     const direction = e.target.attributes.value.value;
     const updatedImgView = parseInt(e.target.attributes[3].value, 10);
+    const updatedThumbnailView = parseInt(e.target.attributes[4].value, 10)
     const photoMax = styles[selectedStyle].photos.length - 1;
     const arr = selectedStyleImgMemory;
 
@@ -81,6 +83,21 @@ const App = () => {
       arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView + 1;
       setSelectedStyleImgMemory(arr);
       setImgView(imgView === photoMax ? photoMax : imgView + 1);
+    }
+    if (direction === 'up') {
+      setThumbnailView(thumbnailView - 1);
+      if (imgView >= thumbnailView) {
+        setImgView(imgView - 1);
+      }
+      console.log('up', thumbnailView);
+    }
+    if (direction === 'down') {
+      setThumbnailView(updatedThumbnailView + 1);
+      if (imgView <= thumbnailView) {
+        setImgView(imgView + 1);
+      }
+      console.log('down', thumbnailView);
+      console.log(parseInt(e.target.attributes[4].value, 10));
     }
   };
 
@@ -200,6 +217,7 @@ const App = () => {
           selectedStyle={selectedStyle}
           selectedStyleImgMemory={selectedStyleImgMemory}
           imgView={imgView}
+          thumbnailView={thumbnailView}
           handleStyleClick={handleStyleClick}
           handleArrowClick={handleArrowClick}
           handleImgThumbnailClick={handleImgThumbnailClick}

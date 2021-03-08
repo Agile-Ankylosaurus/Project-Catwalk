@@ -7,6 +7,7 @@ const ImageGallery = (props) => {
     selectedStyle,
     selectedStyleImgMemory,
     imgView,
+    thumbnailView,
     handleArrowClick,
     handleImgThumbnailClick,
   } = props;
@@ -54,25 +55,59 @@ const ImageGallery = (props) => {
           // style={{ left: 750 }}
         />
       </button>
-      <div className="mainImgThumbnailContainer">
-        {styles[selectedStyle].photos.map((photo, idx) => (
-          <button
-            type="button"
-            onClick={handleImgThumbnailClick}
-            key={`thumbnail${photo.thumbnail_url}`}
-            className="mainImgThumbnailButton"
-            style={{ top: idx * 75 }}
-          >
-            <img
-              src={photo.thumbnail_url}
-              alt={photo.thumbnail_url}
-              key={photo.thumbnail_url}
-              value={idx}
-              className={imgView === idx ? 'mainImgThumbnail highlight' : 'mainImgThumbnail'}
-            />
-          </button>
-        ))}
+      <div
+        className="mainImgThumbnailSlider"
+      >
+        <div
+          className="mainImgThumbnailContainer"
+          style={{ top: thumbnailView * -75 }}
+        >
+          {styles[selectedStyle].photos.map((photo, idx) => (
+            <button
+              type="button"
+              onClick={handleImgThumbnailClick}
+              key={`thumbnail${photo.thumbnail_url}`}
+              className="mainImgThumbnailButton"
+              style={{ top: idx * 75 }}
+            >
+              <img
+                src={photo.thumbnail_url}
+                alt={photo.thumbnail_url}
+                key={photo.thumbnail_url}
+                value={idx}
+                className={imgView === idx ? 'mainImgThumbnail highlight' : 'mainImgThumbnail'}
+              />
+            </button>
+          ))}
+        </div>
       </div>
+      <button
+        type="button"
+        // className="thumbnailArrowButton thumbnailArrowUpper"
+        className={thumbnailView === 0 ? 'hiddenEle' : 'thumbnailArrowButton thumbnailArrowUpper'}
+        onClick={handleArrowClick}
+      >
+        <img
+          src="./img/slimArrow.png"
+          alt="upper thumbnail arrow"
+          className="thumbnailArrow thumbnailArrowUpper"
+          value="up"
+          thumbnailView={thumbnailView}
+        />
+      </button>
+      <button
+        type="button"
+        className={thumbnailView + 7 >= styles[selectedStyle].photos.length ? 'hiddenEle' : 'thumbnailArrowButton thumbnailArrowLower'}
+        onClick={handleArrowClick}
+      >
+        <img
+          src="./img/slimArrow.png"
+          alt="lower thumbnail arrow"
+          className="thumbnailArrow thumbnailArrowLower rotate180"
+          value="down"
+          thumbnailView={thumbnailView}
+        />
+      </button>
     </div>
   );
 };
