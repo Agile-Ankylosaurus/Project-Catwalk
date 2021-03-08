@@ -7,12 +7,14 @@ import QuestionsModal from './QuestionsModal';
 const QuestionsList = (props) => {
   // console.log('hardcode data', QuestionsData.results);
   // console.log('api data', props.questions);
+  // console.log('ques props', props);
   const data = props.questions;
   // const [data, setData] = useState([]); // props.questions
   const [display, setDisplay] = useState(false);
   const [filtered, setFiltered] = useState([]);
   const [showQ, setShowQ] = useState(false);
   const restOfQuestions = data.slice(2, data.length);
+  // const product = props.product.id;
 
   data.sort((a, b) => (
     b.question_helpfulness - a.question_helpfulness));
@@ -33,34 +35,25 @@ const QuestionsList = (props) => {
       setDisplay(false);
     }
   };
-  // console.log(data);
+  // console.log('data', data);
   // const restOfQuestions = data.slice(2, data.length);
   // console.log(restOfQuestions);
 
-  // const MoreQuestions = () => {
-  //   if (data.length > 4) {
-  //     return (
-  //       <div>
-  //         <QuestionsAccordion
-  //           titleQ="More Answered Questions"
-  //           contentQ={restOfQuestions.map(
-  //             (question) => <QuestionEntry key={question.question_id} question={question} />,
-  //           )}
-  //         />
-  //       </div>
-  //     );
-  //   }
-  //   return <></>;
-  // };
-
   const MoreQuestions = () => {
-    if (data.length > 4) {
+    if (data.length > 2) {
       return (
         <div>
           <QuestionsAccordion
             titleQ="More Answered Questions"
             contentQ={restOfQuestions.map(
-              (question) => <QuestionEntry key={question.question_id} question={question} />,
+              (question) => (
+                <QuestionEntry
+                  key={question.question_id}
+                  question={question}
+                  productId={props.productId}
+                  productName={props.productName}
+                />
+              ),
             )}
           />
         </div>
@@ -87,7 +80,12 @@ const QuestionsList = (props) => {
       <MoreQuestions />
       <div>
         <input className="add-question" type="submit" value="Add A Question +" onClick={() => setShowQ(true)} />
-        <QuestionsModal showQ={showQ} onCloseQues={() => setShowQ(false)} />
+        <QuestionsModal
+          showQ={showQ}
+          onCloseQues={() => setShowQ(false)}
+          productId={props.productId}
+          productName={props.productName}
+        />
       </div>
     </div>
   );

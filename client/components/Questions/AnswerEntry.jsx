@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const AnswerEntry = (props) => {
   // console.log('answerEntry: ', props);
@@ -8,7 +9,14 @@ const AnswerEntry = (props) => {
 
   const handleYesClick = () => {
     setCount(disable === false ? count + 1 : count);
-    setDisable(true);
+    // setDisable(true);
+    if (!disable) {
+      const answerId = props.answer.id;
+      props.answer.helpfulness += 1;
+      axios.put(`/api/qa/answers/${answerId}/helpful`, { id: answerId })
+        .then(() => setDisable(true))
+        .catch((err) => console.log('error in put', err));
+    }
   };
 
   const handleReportClick = () => {

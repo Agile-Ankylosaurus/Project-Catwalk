@@ -3,11 +3,13 @@ import AnswersList from './AnswersList';
 import AnswerModal from './AnswerModal';
 
 const QuestionEntry = (props) => {
-  // console.log('questionsEntry props: ', props);
+  // console.log('questionsEntry props: ', props.productId);
   const [questionCount, setQuestionCount] = useState(props.question.question_helpfulness);
   const [countOff, setCountOff] = useState(false);
   const [show, setShow] = useState(false);
-  const [questionBody, setQuestionBody] = useState(props.question.question_body);
+  const [questionBody, setQuestionBody] = useState(props.question);
+  const [productIdModal, setProductIdModal] = useState(props.productId);
+  const [productNameModal, setProductNameModal] = useState(props.productName);
   // console.log(questionBody);
 
   const handleCountClick = () => {
@@ -40,7 +42,13 @@ const QuestionEntry = (props) => {
             Add Answer
           </span>
           <span>
-            <AnswerModal onClose={() => setShow(false)} show={show} questionBody={questionBody} />
+            <AnswerModal
+              productId={productIdModal}
+              productName={productNameModal}
+              onClose={() => setShow(false)}
+              show={show}
+              questionBody={questionBody}
+            />
           </span>
         </span>
       </span>

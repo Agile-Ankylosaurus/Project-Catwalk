@@ -4,6 +4,8 @@ const axios = require('axios');
 const app = express();
 const port = 3000;
 const path = require('path');
+const { reset } = require('nodemon');
+const TOKEN = require('../config.js');
 
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
 
@@ -11,7 +13,6 @@ app.use(express.static(PUBLIC_DIR));
 app.use(express.json());
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
-const TOKEN = require('../config.js');
 
 // API request to get the reviews based on a different sort option
 app.get('/reviews/:params', (req, res) => {
@@ -39,6 +40,64 @@ app.put('/reviews/report', (req, res) => {
   })
     .then(() => res.send(204))
     .catch((err) => console.log('server report error', err));
+});
+
+app.post('/api/qa/questions/:questionId/answers', (req, res) => {
+  const { questionId } = req.params;
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/questions/${questionId}/answers`, req.body.params, {
+    headers: {
+      Authorization: TOKEN,
+    },
+  })
+    .then((response) => {
+      console.log('server answer submit response');
+      res.send(201);
+    })
+    .catch((err) => {
+      console.log('server answer submit error', err);
+      res.sendStatus(500);
+    });
+});
+
+app.post('/api/qa/questions', (req, res) => {
+  // const { prodId } = req.params;
+  // console.log(req.params);
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/questions', req.body, {
+    headers: {
+      Authorization: TOKEN,
+    },
+  })
+    .then((response) => {
+      console.log('server question submit response');
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('server question submit error', err);
+      res.sendStatus(500);
+    });
+});
+
+app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
+  const { answerId } = req.params;
+  console.log(req.params);
+  console.log(req.body);
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/answers/${answerId}/helpful`, 
+    {
+      body: { answer_id: req.body.id },
+    },
+    {
+      headers: {
+        Authorization: TOKEN,
+      },
+    })
+    .then((response) => {
+      console.log('server helpfulness put response');
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('server helpfulness put error', err);
+      res.sendStatus(500);
+    });
 });
 
 app.listen(port, () => {

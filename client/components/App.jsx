@@ -50,6 +50,8 @@ const App = () => {
   const [thumbnailView, setThumbnailView] = useState(0);
   const [selectedStyleImgMemory, setSelectedStyleImgMemory] = useState([]);
   const [overallRating, setRating] = useState(0);
+  const [productId, setProductId] = useState('');
+  const [productName, setProductName] = useState('');
 
   // functions
   const styleMemArrMaker = (numOfStyles) => {
@@ -128,7 +130,7 @@ const App = () => {
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    // const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
+    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
@@ -142,10 +144,10 @@ const App = () => {
       return result;
     };
     const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}`;
-    console.log(randomProductUrl);
+    // console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(randomProductUrl, {
+    axios.get(targetedProductURL, {
       headers: {
         Authorization: TOKEN,
       },
@@ -157,7 +159,7 @@ const App = () => {
         setProduct(productRes.data);
         // get the styles data from the default product id
         // axios.get(`${randomProductUrl}/styles`, {
-        axios.get(`${randomProductUrl}/styles`, {
+        axios.get(`${targetedProductURL}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
@@ -165,6 +167,11 @@ const App = () => {
           .then((styleRes) => {
             setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.results.length));
             setStyles(styleRes.data.results);
+            // console.log('product res', productRes.data);
+            setProductId(productRes.data.id);
+            setProductName(productRes.data.name);
+            setStyles(styleRes.data.results);
+            // console.log('style res', styleRes.data.results)
             // get the reviews meta data from the default product id
             axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
               headers: {
@@ -250,7 +257,7 @@ const App = () => {
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <div id="questions-answers">
-          <QuestionsList questions={questions} />
+          <QuestionsList questions={questions} productId={productId} productName={productName} />
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />
