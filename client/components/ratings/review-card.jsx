@@ -13,9 +13,10 @@ const ReviewCard = ({ review }) => {
       return (
         <div>
           <img
-            src="./img/checkmark.png" className="featureCheckmark"
+            src="./img/checkmark.png"
+            className="featureCheckmark"
             alt="checkmark"
-            />
+          />
           <span className="review-body">I recommend this item.</span>
         </div>
       );
@@ -70,12 +71,14 @@ const ReviewCard = ({ review }) => {
     <div>
       <StarRating number={review.rating} uniqNum={review.date} />
       <span className="review-info">
-        {review.reviewer_name},  {correctDate(review.date)}
+        {review.reviewer_name}
+        `,  `
+        {correctDate(review.date)}
       </span>
       <div className="review-summary">{review.summary}</div>
       <div className="review-body">{review.body}</div>
       <Recommend />
-      {review.photos.map( (photo) => (
+      {review.photos.map((photo) => (
         <ImageModal key={photo.id} photo={photo} />
       ))}
       <Response />

@@ -4,7 +4,7 @@ import StarRating from './StarRating';
 import StarGraph from './StarGraph';
 import Characteristics from './characteristics';
 
-const Breakdown = ({ metaData }) => {
+const Breakdown = ({ metaData, overallRating }) => {
   const transformData = (dataObj) => {
     // initialize the transformed data obj
     const results = {};
@@ -17,31 +17,28 @@ const Breakdown = ({ metaData }) => {
     // find the number of each star rating and the weighted average
     results.stars = {};
     results.totalReviews = 0;
-    results.weightedTotal = 0;
-    for (let i in dataObj.ratings) {
-      results.stars[i] = Number.parseInt(dataObj.ratings[i]);
-      results.totalReviews += results.stars[i];
-      results.weightedTotal += results.stars[i] * Number.parseInt(i);
-    }
-    if (results.totalReviews) {
-      results.weightedAvg = Math.round(10 * (results.weightedTotal / results.totalReviews)) / 10;
+    const ratings = Object.keys(dataObj.ratings);
+    for (let i = 0; i < ratings.length; i += 1) {
+      results.stars[ratings[i]] = parseInt(dataObj.ratings[ratings[i]], 10);
+      results.totalReviews += results.stars[ratings[i]];
     }
 
     // save all the characteristics into the new obj
     results.characteristics = {};
-    for (const key in dataObj.characteristics) {
-      results.characteristics[key] = dataObj.characteristics[key].value;
+    const quals = Object.keys(dataObj.characteristics);
+    for (let j = 0; j < quals.length; j += 1) {
+      results.characteristics[quals[j]] = dataObj.characteristics[quals[j]].value;
     }
     return results;
-  }
+  };
   const goodData = transformData(metaData);
 
   return (
     <div>
-      <h1 className="overall-rating">{goodData.weightedAvg}</h1>
+      <h1 className="overall-rating">{overallRating}</h1>
       <div>
         <span className="stars-rating">
-          <StarRating number={goodData.weightedAvg} uniqNum={goodData.weightedTotal} />
+          <StarRating number={overallRating} uniqNum={goodData.weightedTotal} />
         </span>
       </div>
       <div className="percent-reviews">

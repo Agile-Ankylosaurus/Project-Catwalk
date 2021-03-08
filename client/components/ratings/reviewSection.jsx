@@ -15,28 +15,11 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
   function handleSortChange(e) {
     const sort = e.target.value;
-    const dataObj = {
-      id: metaData.product_id,
-      num: reviews.length,
-      sort: sort,
-    };
     if (sort !== sortOrder) {
       setSort(sort);
-      console.log(dataObj);
-      axios.get('/reviews/sort', { params: {dataObj} })
-        .then((resData) => console.log('success', resData))
+      axios.get(`/reviews/id=${metaData.product_id}&count=${reviews.length}&sort=${sort}`)
+        .then((resData) => setReviews(resData.data.results))
         .catch((err) => console.log('error in the post', err));
-      axios.get(`${url}reviews/?product_id=${metaData.product_id}&count=${reviews.length}&sort=${sort}`, {
-        headers: {
-          Authorization: TOKEN,
-        },
-      })
-        .then((allReviews) => {
-          setReviews(allReviews.data.results);
-        })
-        .catch((err) => {
-          console.log('error getting reviews', err);
-        });
     }
   }
 
@@ -66,7 +49,10 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
   return (
     <div>
       <form className="review-head" onSubmit={handleSubmit}>
-        <h4 className="review-head">{reviews.length} reviews, sorted by </h4>
+        <h4 className="review-head">
+          {reviews.length}
+          ` reviews, sorted by `
+        </h4>
         <select className="sortOptions" onChange={handleSortChange} value={sortOrder}>
           <option value="relevant">relevance</option>
           <option value="helpful">helpfulness</option>

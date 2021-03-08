@@ -14,12 +14,12 @@ const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
 const TOKEN = require('../config.js');
 
 // API request to get the reviews based on a different sort option
-app.get('/reviews/sort', (req, res) => {
-  console.log(req.params);
-  axios.get(`${url}reviews/?product_id=${req.body.id}&count=${req.body.num}&sort=${req.body.sort}`, {
+app.get('/reviews/:params', (req, res) => {
+  const { params } = req.params;
+  axios.get(`${url}reviews/?product_${params}`, {
     headers: { Authorization: TOKEN },
   })
-    .then((data) => res.send(data))
+    .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting reviews', err.response.data));
 });
 

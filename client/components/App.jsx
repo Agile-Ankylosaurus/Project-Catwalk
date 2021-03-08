@@ -128,7 +128,7 @@ const App = () => {
 
   const getOneProduct = () => {
     // this url tests for 4+ styles and items on sale
-    const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
+    // const targetedProductURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
@@ -145,7 +145,7 @@ const App = () => {
     console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(targetedProductURL, {
+    axios.get(randomProductUrl, {
       headers: {
         Authorization: TOKEN,
       },
@@ -157,7 +157,7 @@ const App = () => {
         setProduct(productRes.data);
         // get the styles data from the default product id
         // axios.get(`${randomProductUrl}/styles`, {
-        axios.get(`${targetedProductURL}/styles`, {
+        axios.get(`${randomProductUrl}/styles`, {
           headers: {
             Authorization: TOKEN,
           },
@@ -166,7 +166,6 @@ const App = () => {
             setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.results.length));
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
-            console.log('style', styles);
             axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
               headers: {
                 Authorization: TOKEN,
@@ -260,6 +259,7 @@ const App = () => {
             metaData={meta}
             reviews={reviews}
             setReviews={setReviews}
+            overallRating={overallRating}
           />
         </div>
         <div className="gridSpacer" />

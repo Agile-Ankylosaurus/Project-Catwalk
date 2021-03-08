@@ -11,10 +11,11 @@ const Characteristics = ({ qualities }) => {
         <div key={quality + idx}>
           <div className="quality">
             {quality}
-            <div className="slider"
-              style={{width: `${100 - (Math.round(100 * (qualities[quality] / 5)))}%`}}
+            <div
+              className="slider"
+              style={{ width: `${100 - (Math.round(100 * (qualities[quality] / 5)))}%` }}
             >
-              <span className="slider-shape"></span>
+              <span className="slider-shape" />
             </div>
           </div>
           <div className="qualbar" />
@@ -25,6 +26,5 @@ const Characteristics = ({ qualities }) => {
     </div>
   );
 };
-
 
 export default Characteristics;

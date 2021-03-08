@@ -28,9 +28,9 @@ const AddModal = ({ metaData, closeClick }) => {
       alert('Please tell us your nickname.');
     } else if (email === '' || !validateEmail(email)) {
       alert('Please give us a correct e-mail address.');
-    } else if( !validCharacteristics() ) {
+    } else if (!validCharacteristics()) {
       alert('Please describe all the products characteristics');
-    } else if ( !validPhotos ) {
+    } else if (!validPhotos) {
       alert('There was a problem with one or more of your photos');
     } else {
       setComplete(true);
@@ -65,11 +65,11 @@ const AddModal = ({ metaData, closeClick }) => {
         <span>{quality[0]}</span>
         <span className="radio-qual">
           <span className="low-qual">{MEANINGS[quality[0]][1]}</span>
-          <input type="radio" name={quality[0]} value="1" onClick={()=>setQuals(value)} />
-          <input type="radio" name={quality[0]} value="2" onClick={()=>setQuals(value)} />
-          <input type="radio" name={quality[0]} value="3" onClick={()=>setQuals(value)} />
-          <input type="radio" name={quality[0]} value="4" onClick={()=>setQuals(value)} />
-          <input type="radio" name={quality[0]} value="5" onClick={()=>setQuals(value)} />
+          <input type="radio" name={quality[0]} value="1" onClick={() => setQuals(value)} />
+          <input type="radio" name={quality[0]} value="2" onClick={() => setQuals(value)} />
+          <input type="radio" name={quality[0]} value="3" onClick={() => setQuals(value)} />
+          <input type="radio" name={quality[0]} value="4" onClick={() => setQuals(value)} />
+          <input type="radio" name={quality[0]} value="5" onClick={() => setQuals(value)} />
           <span className="high-qual">{MEANINGS[quality[0]][5]}</span>
         </span>
       </div>
