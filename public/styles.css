@@ -747,11 +747,15 @@ body {
   overflow-y: scroll;
 }
 .review-head {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 15px;
   padding: 0 0 20px;
   width: 100%;
   display: inline;
+}
+.sort-options {
+  border: none;
+  border-bottom: 2px solid #000;
+  font-size: 15px;
 }
 .review-info {
   float: right;
@@ -805,6 +809,13 @@ body {
 .review-response {
   font-size: 15px;
   background-color: #aaa;
+  padding: 15px 10px;
+}
+.response-header {
+  font-weight: bold;
+  margin-bottom: 10px
+}
+.response-body {
   padding: 10px;
 }
 .review-help {

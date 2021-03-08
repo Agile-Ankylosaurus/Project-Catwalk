@@ -4,15 +4,12 @@ import axios from 'axios';
 import ReviewCard from './review-card';
 import AddModal from './new-review';
 
-const TOKEN = require('../../../config.js');
-
 const Reviews = ({ reviews, metaData, setReviews }) => {
   const [reviewNum, setNum] = useState(0);
   const [sortOrder, setSort] = useState('relevant');
   const [openAdd, setOpen] = useState(false);
 
   // resorting the reviews on the options click
-  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
   function handleSortChange(e) {
     const sort = e.target.value;
     if (sort !== sortOrder) {
@@ -49,11 +46,9 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
   return (
     <div>
       <form className="review-head" onSubmit={handleSubmit}>
-        <h4 className="review-head">
-          {reviews.length}
-          ` reviews, sorted by `
-        </h4>
-        <select className="sortOptions" onChange={handleSortChange} value={sortOrder}>
+        <span>{reviews.length}</span>
+        <span className="review-head"> reviews, sorted by</span>
+        <select className="sort-options" onChange={handleSortChange} value={sortOrder}>
           <option value="relevant">relevance</option>
           <option value="helpful">helpfulness</option>
           <option value="newest">newest</option>

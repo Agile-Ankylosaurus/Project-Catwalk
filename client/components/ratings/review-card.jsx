@@ -29,8 +29,8 @@ const ReviewCard = ({ review }) => {
     if (review.response) {
       return (
         <div className="review-response">
-          <div className="review-response" style={{ fontWeight: 'bold' }}>Response:</div>
-          <span className="review-response">{review.response}</span>
+          <div className="response-header" style={{ fontWeight: 'bold' }}>Response:</div>
+          <span className="response-body">{review.response}</span>
         </div>
       );
     }
