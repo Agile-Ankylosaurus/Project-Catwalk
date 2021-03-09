@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import reviews from '../Sample_data/SampleReviews';
 import ReviewCard from './review-card';
@@ -9,14 +9,25 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
   const [sortOrder, setSort] = useState('relevant');
   const [openAdd, setOpen] = useState(false);
 
+  // get new reviews
+  const newList = (sort) => {
+    if (sort) {
+      axios.get(`/reviews/id=${metaData.product_id}&count=${reviews.length}&sort=${sort}`)
+        .then((resData) => setReviews(resData.data.results))
+        .catch((err) => console.log('error in the post', err));
+    } else {
+      axios.get(`/reviews/id=${metaData.product_id}&count=${reviews.length}`)
+        .then((resData) => setReviews(resData.data.results))
+        .catch((err) => console.log('error in the post', err));
+    }
+  }
+
   // resorting the reviews on the options click
   function handleSortChange(e) {
     const sort = e.target.value;
     if (sort !== sortOrder) {
       setSort(sort);
-      axios.get(`/reviews/id=${metaData.product_id}&count=${reviews.length}&sort=${sort}`)
-        .then((resData) => setReviews(resData.data.results))
-        .catch((err) => console.log('error in the post', err));
+      newList(sort);
     }
   }
 
@@ -35,13 +46,20 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
   }
 
   // check length of reviews section
-  const DisplayReviews = () => (
-    <div>
-      {[...Array(reviewNum + 2)].map( (item, idx) => (
-        <ReviewCard key={reviews[idx].id + reviews[idx].date} review={reviews[idx]} />
-      ))}
-    </div>
-  );
+  const DisplayReviews = () => {
+    let moreReviews = ((reviews.length - reviewNum === 1) ? 1 : 2);
+    return (
+      <div>
+        {[...Array(reviewNum + moreReviews)].map((item, idx) => (
+          <ReviewCard
+            key={reviews[idx].id + reviews[idx].date}
+            review={reviews[idx]}
+            newList={newList}
+          />
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div>

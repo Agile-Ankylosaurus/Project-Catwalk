@@ -693,11 +693,11 @@ body {
 /* ------------------------- Reviews and Ratings Module -----------------------------*/
 
 .metadata-sidebar {
-  width: 30%;
+  width: 25%;
   display: inline-block;
 }
 .reviews {
-  width: 65%;
+  width: 70%;
   display: inline;
   float: right;
 }
@@ -759,7 +759,7 @@ body {
   margin: 1px;
   height: 15px;
   width: 15px;
-  background-color: #aaa;
+  background-color: #bbb;
   clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
   -webkit-clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
 }
@@ -827,7 +827,7 @@ body {
   top: 2px;
 }
 .review-cards {
-  max-height: 800px;
+  max-height: 600px;
   overflow-y: scroll;
 }
 .review-head {
@@ -889,6 +889,11 @@ body {
   border: none;
   outline: none;
   cursor: pointer;
+}
+.recommend {
+  font-size: 15px;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 .review-response {
   font-size: 15px;

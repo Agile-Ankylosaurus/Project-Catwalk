@@ -38,7 +38,7 @@ const Breakdown = ({ metaData, overallRating }) => {
       <h1 className="overall-rating">{overallRating}</h1>
       <div>
         <span className="stars-rating">
-          <StarRating number={overallRating} uniqNum={goodData.weightedTotal} />
+          <StarRating number={overallRating} uniqNum={goodData.totalReviews} />
         </span>
       </div>
       <div className="percent-reviews">

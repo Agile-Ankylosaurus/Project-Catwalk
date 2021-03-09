@@ -89,15 +89,24 @@ const AddModal = ({ metaData, closeClick }) => {
             <div>
               <div className="add-review-area">Review</div>
               <span className="data-input">Summary  </span>
-              <input type="text" className="input-box" placeholder="Example: Best Purchase Ever!" />
-              <input type="text" className="input-review" placeholder="Why did you like the product or not" />
+              <input
+                type="text"
+                className="input-box"
+                placeholder="Example: Best Purchase Ever!"
+              />
+              <input
+                type="text"
+                className="input-review"
+                rows="5"
+                placeholder="Why did you like the product or not"
+              />
             </div>
             <div>
-              <span className="data-input">Nickname:  </span>
+              <span className="data-input">Nickname:</span>
               <input type="text" className="input-box" placeholder="Example: Jackson11!" />
             </div>
             <div>
-              <span className="data-input">E-mail:  </span>
+              <span className="data-input">E-mail:</span>
               <input type="email" className="input-box" placeholder="Example: Jackson11!@email.com" />
             </div>
             <div className="add-recommend">

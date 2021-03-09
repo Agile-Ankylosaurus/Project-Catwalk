@@ -3,7 +3,7 @@ import axios from 'axios';
 import StarRating from './StarRating';
 import ImageModal from './imageModal';
 
-const ReviewCard = ({ review }) => {
+const ReviewCard = ({ review, newList }) => {
   const [help, setHelp] = useState(false);
   const [report, setReport] = useState('Report');
 
@@ -11,13 +11,13 @@ const ReviewCard = ({ review }) => {
   const Recommend = () => {
     if (review.recommend) {
       return (
-        <div>
+        <div className="recommend">
           <img
             src="./img/checkmark.png"
             className="featureCheckmark"
             alt="checkmark"
           />
-          <span className="review-body">I recommend this item.</span>
+          <span className="recommend">I recommend this item.</span>
         </div>
       );
     }
@@ -51,7 +51,10 @@ const ReviewCard = ({ review }) => {
   function handleReportClick() {
     if (report === 'Report') {
       axios.put('/reviews/report', {id: review.review_id})
-        .then(() => setReport('Reported'))
+        .then(() => {
+          setReport('Reported');
+          newList();
+        })
         .catch((err) => console.log('error in the post', err));
     }
   }
@@ -71,16 +74,16 @@ const ReviewCard = ({ review }) => {
     <div>
       <StarRating number={review.rating} uniqNum={review.date} />
       <span className="review-info">
-        {review.reviewer_name}
-        `,  `
-        {correctDate(review.date)}
+        <span>{review.reviewer_name}</span>
+        <span>,  </span>
+        <span>{correctDate(review.date)}</span>
       </span>
       <div className="review-summary">{review.summary}</div>
       <div className="review-body">{review.body}</div>
-      <Recommend />
       {review.photos.map((photo) => (
         <ImageModal key={photo.id} photo={photo} />
       ))}
+      <Recommend />
       <Response />
       <div className="review-help">
         <span className="normal">Helpful?  </span>
