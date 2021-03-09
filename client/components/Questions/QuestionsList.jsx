@@ -5,24 +5,16 @@ import QuestionsAccordion from './QuestionsAccordion';
 import QuestionsModal from './QuestionsModal';
 
 const QuestionsList = (props) => {
-  // console.log('hardcode data', QuestionsData.results);
-  // console.log('api data', props.questions);
-  // console.log('ques props', props);
   const data = props.questions;
-  // const [data, setData] = useState([]); // props.questions
   const [display, setDisplay] = useState(false);
   const [filtered, setFiltered] = useState([]);
   const [showQ, setShowQ] = useState(false);
   const restOfQuestions = data.slice(2, data.length);
-  // const product = props.product.id;
+  const showProduct = props.product;
 
   data.sort((a, b) => (
     b.question_helpfulness - a.question_helpfulness));
   const firstFour = data.slice(0, 2);
-
-  // React.useEffect(() => {
-  //   setData(props.questions);
-  // }, [props.questions]);
 
   const filteredQuestions = (value) => {
     setDisplay(true);
@@ -35,14 +27,11 @@ const QuestionsList = (props) => {
       setDisplay(false);
     }
   };
-  // console.log('data', data);
-  // const restOfQuestions = data.slice(2, data.length);
-  // console.log(restOfQuestions);
 
   const MoreQuestions = () => {
     if (data.length > 2) {
       return (
-        <div>
+        <span>
           <QuestionsAccordion
             titleQ="More Answered Questions"
             contentQ={restOfQuestions.map(
@@ -50,13 +39,12 @@ const QuestionsList = (props) => {
                 <QuestionEntry
                   key={question.question_id}
                   question={question}
-                  productId={props.productId}
-                  productName={props.productName}
+                  product={showProduct}
                 />
               ),
             )}
           />
-        </div>
+        </span>
       );
     }
     return <></>;
@@ -64,8 +52,8 @@ const QuestionsList = (props) => {
 
   return (
     <div>
-      <h3>Questions & Answers</h3>
-      <div>
+      <h3 className="title">Questions & Answers</h3>
+      <div className="search-top">
         <SearchBar filteredQuestions={filteredQuestions} />
       </div>
       <div>
@@ -77,16 +65,15 @@ const QuestionsList = (props) => {
             (question) => <QuestionEntry key={question.question_id} question={question} />,
           )}
       </div>
-      <MoreQuestions />
-      <div>
-        <input className="add-question" type="submit" value="Add A Question +" onClick={() => setShowQ(true)} />
-        <QuestionsModal
-          showQ={showQ}
-          onCloseQues={() => setShowQ(false)}
-          productId={props.productId}
-          productName={props.productName}
-        />
-      </div>
+      <MoreQuestions className="add-question" />
+      <input className="add-question" type="submit" value="Add A Question +" onClick={() => setShowQ(true)} />
+      <QuestionsModal
+        showQ={showQ}
+        onCloseQues={() => setShowQ(false)}
+        productId={showProduct.id}
+        productName={showProduct.name}
+        className="ques-modal"
+      />
     </div>
   );
 };

@@ -60,8 +60,6 @@ app.post('/api/qa/questions/:questionId/answers', (req, res) => {
 });
 
 app.post('/api/qa/questions', (req, res) => {
-  // const { prodId } = req.params;
-  // console.log(req.params);
   axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/questions', req.body, {
     headers: {
       Authorization: TOKEN,
@@ -79,8 +77,6 @@ app.post('/api/qa/questions', (req, res) => {
 
 app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
   const { answerId } = req.params;
-  console.log(req.params);
-  console.log(req.body);
   axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/answers/${answerId}/helpful`, 
     {
       body: { answer_id: req.body.id },
@@ -96,6 +92,48 @@ app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
     })
     .catch((err) => {
       console.log('server helpfulness put error', err);
+      res.sendStatus(500);
+    });
+});
+
+app.put('/api/qa/questions/:questionId/helpful', (req, res) => {
+  const { questionId } = req.params;
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/questions/${questionId}/helpful`,
+    {
+      body: { question_id: req.body.id },
+    },
+    {
+      headers: {
+        Authorization: TOKEN,
+      },
+    })
+    .then((response) => {
+      console.log('server helpfulness question put response');
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('server helpfulness question put error', err);
+      res.sendStatus(500);
+    });
+});
+
+app.put('/api/qa/answers/:answerId/report', (req, res) => {
+  const { answerId } = req.params;
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/answers/${answerId}/report`,
+    {
+      body: { answer_id: req.body.id },
+    },
+    {
+      headers: {
+        Authorization: TOKEN,
+      },
+    })
+    .then((response) => {
+      console.log('server report put response');
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('server report put error', err);
       res.sendStatus(500);
     });
 });

@@ -257,7 +257,7 @@ const App = () => {
         <div className="gridSpacer" />
         <div className="gridSpacer" />
         <div id="questions-answers">
-          <QuestionsList questions={questions} productId={productId} productName={productName} />
+          <QuestionsList questions={questions} product={product} productName={productName} />
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />

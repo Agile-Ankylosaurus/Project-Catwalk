@@ -11,7 +11,7 @@ const QuestionsAccordion = (props) => {
   const toggleAccordionQ = () => {
     setActiveQ(activeQ === '' ? 'activeQ' : '');
     setHeightQ(
-      activeQ === 'activeQ' ? '0px' : `${listHeight.current.scrollHeight}px`,
+      activeQ === 'activeQ' ? '0px' : '500px',
     );
     setTitle(!title);
     setRotate(activeQ === '' ? 'chevron-rotate' : 'chevron');

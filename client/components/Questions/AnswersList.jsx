@@ -3,16 +3,14 @@ import AnswerEntry from './AnswerEntry';
 import AnswerAccordion from './AnswerAccordion';
 
 const AnswersList = (props) => {
-  // console.log('answersList props: ', props.answer);
   const answerValues = Object.values(props.answer);
-  // console.log('answervalue', answerValues);
   const helpfulSort = answerValues.sort((a, b) => (b.helpfulness - a.helpfulness));
 
   const sellers = () => {
     const sellerArr = [];
     for (let i = 0; i < answerValues.length; i += 1) {
       if (answerValues[i].answerer_name === ('Seller')) {
-        sellerArr.unshift(answerValues[i]);
+        sellerArr.push(answerValues[i]);
       }
     }
     return sellerArr;
@@ -21,9 +19,11 @@ const AnswersList = (props) => {
   const twoAnswers = () => {
     const sellerPresent = sellers();
     if (sellerPresent.length > 0) {
-      sellerPresent.forEach((item) => {
-        helpfulSort.unshift(item);
-      });
+      for (let i = 0; i < sellerPresent.length; i += 1) {
+        if (sellerPresent[i].id === undefined) {
+          helpfulSort.unshift(sellerPresent[i]);
+        }
+      }
       return helpfulSort.slice(0, 2);
     }
     return helpfulSort.slice(0, 2);

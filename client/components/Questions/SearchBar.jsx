@@ -14,7 +14,7 @@ const SearchBar = (props) => {
         className="search"
         type="text"
         value={input}
-        placeholder="Have a question? Search for Answers"
+        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS"
         onChange={handleChange}
       />
       <img className="search-icon" src="https://img.icons8.com/android/24/000000/search.png" alt="" />

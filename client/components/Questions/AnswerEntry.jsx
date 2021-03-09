@@ -21,11 +21,13 @@ const AnswerEntry = (props) => {
 
   const handleReportClick = () => {
     setReport(report === 'Report' ? 'Reported' : 'Reported');
+    const answerId = props.answer.id;
+    if (report === 'Report') {
+      axios.put(`/api/qa/answers/${answerId}/report`, { id: answerId })
+        .then(() => setReport('Reported'))
+        .catch((err) => console.log('error in report put', err));
+    }
   };
-  // props.answer.photos.map((photo) =>
-  //   console.log(photo),
-  //   <img src={photo.photos} alt="" />
-  // )
 
   const formattedDate = (date) => {
     const tempDate = new Date(date).toLocaleDateString('en-gb', {
@@ -37,41 +39,63 @@ const AnswerEntry = (props) => {
     return `${dateArr[1]} ${dateArr[0]}, ${dateArr[2]}`;
   };
 
+  // console.log(props.answer);
+  // console.log(props.answer.photos);
+  const Photos = () => {
+    const photoPresent = props.answer.photos;
+    if (photoPresent.length >= 1) {
+      return (
+        photoPresent.map(
+          (photo, idx) => <img src={photo} key={idx} alt="" className="answer-img" />
+        )
+      );
+    }
+    return <></>;
+  };
+
   return (
     <div className="answer-entry">
       <div>
-        A: {props.answer.body}
+        <span className="answer-letter">
+          A:
+          {' '}
+        </span>
+        <span className="answer-body">
+          {props.answer.body}
+        </span>
       </div>
       <span className="user-info">
         by
+        {' '}
         {props.answer.answerer_name}
         ,
-        {'   '}
+        {' '}
       </span>
-      <span>
+      <span className="user-info-date">
         {formattedDate(props.answer.date)}
-        {'   '}
+        {' '}
       </span>
-      <span>
+      <span className="user-info-helpful">
         | Helpful?
         {' '}
-        <span onClick={handleYesClick}>
+        <span className="user-info-click" onClick={handleYesClick}>
           Yes
           {' '}
         </span>
-        (
-        {count}
-        )
+        <span className="user-info-click">
+          (
+          {count}
+          )
+        </span>
+        {' '}
         |
       </span>
-      <span onClick={handleReportClick}>
-        {' '}
+      {' '}
+      <span className="user-info-click" onClick={handleReportClick}>
         {report}
       </span>
-      <div className="container-img">
-        <img className="answer-img" src={props.answer.photos[0]} alt="" />
-        <img className="answer-img" src={props.answer.photos[1]} alt="" />
-        <img className="answer-img" src={props.answer.photos[2]} alt="" />
+      <div>
+        <Photos />
       </div>
     </div>
   );

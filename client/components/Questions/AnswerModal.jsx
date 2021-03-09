@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import AnswersAccordion from './AnswerAccordion';
 
 const AnswerModal = (props) => {
   const [answerValue, setAnswerValue] = useState('');
   const [nickname, setNickname] = useState('');
   const [emailAnswer, setEmailAnswer] = useState('');
   const [file, setFile] = useState([]);
-
-  if (!props.show) {
-    return null;
-  }
+  const showDisplay = props.show;
+  const prodName = props.productName;
 
   const handleAnswer = (e) => {
     setAnswerValue(e.target.value);
@@ -29,8 +28,6 @@ const AnswerModal = (props) => {
     setFile(array);
   };
 
-  // console.log('answer modal', props);
-
   const handleAnswerSubmit = () => {
     if (answerValue.length === 0) {
       alert('You must enter the following: answer');
@@ -44,7 +41,6 @@ const AnswerModal = (props) => {
     if (!emailAnswer.includes('@') || !emailAnswer.includes('.com')) {
       alert('The email address provided is not in correct email format');
     }
-    // console.log('answer', answerValue, 'nickname', nickname, 'email', email);
 
     axios.post(`/api/qa/questions/${props.questionBody.question_id}/answers`, {
       params: {
@@ -62,36 +58,40 @@ const AnswerModal = (props) => {
       });
   };
 
+  if (showDisplay === false) {
+    return null;
+  }
+
   return (
     <div className="modal-a">
       <div className="modal-a-content">
         <div className="modal-a-header">
           <h4 className="modal-a-title"> Submit Your Answer </h4>
-          <h4 className="modal-a-title"> [Product Title] : {props.questionBody.question_body} </h4>
+          <h4 className="modal-a-title"> {prodName} {props.questionBody.question_body} </h4>
         </div>
         <form className="modal-a-body">
+          Your Answer *
           <div>
-            Your Answer *
-            <textarea value={answerValue} maxLength="1000" rows="5" cols="33" onChange={handleAnswer} />
+            <textarea value={answerValue} maxLength="1000" rows="5" cols="37" onChange={handleAnswer} />
           </div>
-          <div>
+          <div className="modal-name"> 
             What is your nickname*
             <input type="text" value={nickname} maxLength="60" onChange={handleNickname} placeholder="Example: jack543!" />
-            <div>
+            <div className="disclaimer">
               For privacy reasons, do not use your full name or email address
             </div>
           </div>
-          <div>
+          <div className="modal-name">
             Your email*
-            <input type="text" value={emailAnswer} maxLength="60" onChange={handleEmail} placeholder="Example: jack@email.com" />
-            <div>
+            <input type="text" value={emailAnswer} maxLength="60" onChange={handleEmail} placeholder="Example: jack@email.com" className="input-email" />
+            <div className="disclaimer">
               For authentication reasons, you will not be emailed
             </div>
           </div>
-          <input type="file" onChange={fileChange} />
+          <input type="file" onChange={fileChange} className="modal-name"/>
           {file.map((photo, idx) => <img src={photo} key={idx} alt="" className="upload-photo" />)}
-          <div>
-            <button type="button" onClick={handleAnswerSubmit}>Submit</button>
+          <div className="submit">
+            <button type="button" onClick={handleAnswerSubmit}>Submit Your Answer Here</button>
           </div>
         </form>
         <div className="modal-a-footer">

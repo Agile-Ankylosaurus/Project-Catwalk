@@ -5,8 +5,7 @@ const QuestionsModal = (props) => {
   const [questionsValue, setQuestionsValue] = useState('');
   const [nicknameQues, setNicknameQues] = useState('');
   const [emailQues, setEmailQues] = useState('');
-  // console.log('ques modal', props.productId);
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
   const prodId = props.productId;
   const prodName = props.productName;
 
@@ -51,8 +50,6 @@ const QuestionsModal = (props) => {
       .catch((err) => {
         console.log('error submitting question', err);
       });
-
-    setShow(true);
   };
 
   return (
@@ -67,25 +64,25 @@ const QuestionsModal = (props) => {
           </h4>
         </div>
         <form className="modal-q-body">
+          Your Question *
           <div>
-            Your Question *
-            <textarea value={questionsValue} maxLength="1000" rows="5" cols="33" onChange={handleQuestions} />
+            <textarea value={questionsValue} maxLength="1000" rows="5" cols="37" onChange={handleQuestions} />
           </div>
-          <div>
+          <div className="modal-name">
             What is your nickname*
             <input type="text" value={nicknameQues} maxLength="60" onChange={handleNicknameQues} placeholder="Example: jackson11!" />
-            <div>
+            <div className="disclaimer">
               For privacy reasons, do not use your full name or email address
             </div>
           </div>
-          <div>
+          <div className="modal-name">
             Your email*
-            <input type="text" value={emailQues} maxLength="60" onChange={handleEmailQues} placeholder="Why did you like the product or not?" />
-            <div>
+            <input type="text" value={emailQues} maxLength="60" onChange={handleEmailQues} placeholder="Why did you like the product or not?" className="input-email" />
+            <div className="disclaimer">
               For authentication reasons, you will not be emailed
             </div>
           </div>
-          <button type="button" onClick={handleQuestionSubmit}>Submit</button>
+          <button type="button" onClick={handleQuestionSubmit}>Submit Your Question Here</button>
         </form>
         <div className="modal-q-footer">
           <button type="button" onClick={props.onCloseQues} className="close-q-btn">Close</button>
