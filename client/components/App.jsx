@@ -5,7 +5,6 @@ import ProductDetailsView from './productDetails/ProductDetailsView';
 import ProductDescription from './productDetails/ProductDescription';
 
 const axios = require('axios');
-const TOKEN = require('../../config.js');
 
 const App = () => {
   const [product, setProduct] = useState(
@@ -52,6 +51,7 @@ const App = () => {
   const [overallRating, setRating] = useState(0);
   const [productId, setProductId] = useState('');
   const [productName, setProductName] = useState('');
+  const [newProductID, setNewProductID] = useState('');
 
   // functions
   const styleMemArrMaker = (numOfStyles) => {
@@ -60,6 +60,12 @@ const App = () => {
       arr.push(0);
     }
     return arr;
+  };
+
+  const handleNewProduct = (e) => {
+    e.preventDefault();
+    console.log(newProductID);
+    getOneProduct(newProductID);
   };
 
   const handleImgThumbnailClick = (e) => {
@@ -129,22 +135,23 @@ const App = () => {
     return weightedAvg;
   };
 
-  const getOneProduct = () => {
+  const getOneProduct = (newProductID) => {
     // this url tests for 4+ styles and items on sale
     const targetedProductUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
+    console.log('getting product info', newProductID);
     const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
     const productLimit = 20;
-    const randomNumberGenerator = (max) => {
-      let result = Math.floor(Math.random() * Math.floor(max) + 1);
-      if (result < 10) {
-        result = `2011${result.toString()}`;
-        return result;
-      }
-      result = `201${result.toString()}`;
-      return result;
-    };
-    const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}`;
+    // const randomNumberGenerator = (max) => {
+    //   let result = Math.floor(Math.random() * Math.floor(max) + 1);
+    //   if (result < 10) {
+    //     result = `2011${result.toString()}`;
+    //     return result;
+    //   }
+    //   result = `201${result.toString()}`;
+    //   return result;
+    // };
+    // const randomProductUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/${randomNumberGenerator(productLimit).toString()}`;
     // console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
@@ -173,11 +180,7 @@ const App = () => {
             setStyles(styleRes.data.results);
             // console.log('style res', styleRes.data.results)
             // get the reviews meta data from the default product id
-            axios.get(`${url}reviews/meta?product_id=${productRes.data.id}`, {
-              headers: {
-                Authorization: TOKEN,
-              },
-            })
+            axios.get(`reviews/meta/id=${productRes.data.id}`)
               .then((ratingMeta) => {
                 // console.log(ratingMeta.data);
                 const metaData = ratingMeta.data;
@@ -187,19 +190,11 @@ const App = () => {
                 setMeta(metaData);
                 setRating(getOverallRating(metaData));
                 // get all reviews for the default product id
-                axios.get(`${url}reviews/?product_id=${productRes.data.id}&count=${totalReviews}`, {
-                  headers: {
-                    Authorization: TOKEN,
-                  },
-                })
+                axios.get(`reviews/id=${productRes.data.id}&count=${totalReviews}`)
                   .then((allReviews) => {
                     setReviews(allReviews.data.results);
                     // get questions for q&a
-                    axios.get(`${url}qa/questions/?product_id=${productRes.data.id}`, {
-                      headers: {
-                        Authorization: TOKEN,
-                      },
-                    })
+                    axios.get(`/questions/id=${productRes.data.id}`)
                       .then((question) => {
                         setQuestions(question.data.results);
                       })
@@ -224,7 +219,7 @@ const App = () => {
       });
   };
 
-  useState(getOneProduct);
+  useState(() => getOneProduct(20103));
 
   return (
     <div className="">
@@ -234,7 +229,15 @@ const App = () => {
           <div className="inner-header">
             <img className="logo-img" src="./img/ankylosaur1.jpg" alt="logo" />
             <p className="logo">Agile Creations</p>
-            <input className="logo-search" placeholder="search..." />
+            <span className="header-search">
+              <input
+                className="logo-search"
+                placeholder="search..."
+                value={newProductID}
+                onChange={(e) => { setNewProductID(e.target.value); }}
+              />
+              <button type="submit" onClick={handleNewProduct}>Submit</button>
+            </span>
           </div>
         </div>
         <div className="gridSpacer" />

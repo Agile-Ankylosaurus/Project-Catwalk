@@ -5,7 +5,7 @@ const MEANINGS = require('./meanings');
 
 const AddModal = ({ metaData, closeClick }) => {
   const [newRating, setRating] = useState(0);
-  const [newQuals, setQuals] = useState(0);
+  const [newQuals, setQuals] = useState([]);
   const [recommend, setRecommend] = useState(true);
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
@@ -34,12 +34,14 @@ const AddModal = ({ metaData, closeClick }) => {
       alert('There was a problem with one or more of your photos');
     } else {
       setComplete(true);
-      // var temp = new Date();
-      // newReview.date = temp.toISOString();
+    }
+    if(complete) {
+      console.log('we should submit this review');
     }
   }
 
   const ShowRating = () => {
+    console.log(summary, body, name, email, recommend);
     if (newRating === 0) {
       return (
         <div>
@@ -58,20 +60,53 @@ const AddModal = ({ metaData, closeClick }) => {
   };
 
   const Characteristic = () => {
-    const quality = Object.keys(metaData.characteristics);
-    console.log(quality);
+    const qualities = Object.keys(metaData.characteristics);
+    console.log(qualities);
     return (
       <div>
-        <span>{quality[0]}</span>
-        <span className="radio-qual">
-          <span className="low-qual">{MEANINGS[quality[0]][1]}</span>
-          <input type="radio" name={quality[0]} value="1" onClick={() => setQuals(value)} />
-          <input type="radio" name={quality[0]} value="2" onClick={() => setQuals(value)} />
-          <input type="radio" name={quality[0]} value="3" onClick={() => setQuals(value)} />
-          <input type="radio" name={quality[0]} value="4" onClick={() => setQuals(value)} />
-          <input type="radio" name={quality[0]} value="5" onClick={() => setQuals(value)} />
-          <span className="high-qual">{MEANINGS[quality[0]][5]}</span>
-        </span>
+        {qualities.map((quality) => (
+          <div>
+            <div className="radio-qual">
+              <span>{quality}</span>
+              <span className="radio-qual-list">
+                <input
+                  className="radio-char-btn"
+                  type="radio"
+                  value="1"
+                  onClick={() => setQuals(value)}
+                />
+                <input
+                  className="radio-char-btn"
+                  type="radio"
+                  value="2"
+                  onClick={() => setQuals(value)}
+                />
+                <input
+                  className="radio-char-btn"
+                  type="radio"
+                  value="3"
+                  onClick={() => setQuals(value)}
+                />
+                <input
+                  className="radio-char-btn"
+                  type="radio"
+                  value="4"
+                  onClick={() => setQuals(value)}
+                />
+                <input
+                  className="radio-char-btn"
+                  type="radio"
+                  value="5"
+                  onClick={() => setQuals(value)}
+                />
+              </span>
+            </div>
+            <span className="radio-qual">
+              <span className="low-qual-add">{MEANINGS[quality][1]}</span>
+              <span className="high-qual-add">{MEANINGS[quality][5]}</span>
+            </span>
+          </div>
+        ))}
       </div>
     );
   };
@@ -84,36 +119,73 @@ const AddModal = ({ metaData, closeClick }) => {
           <h1>Write Your Review</h1>
           <h3>--- about the Product ---</h3>
         </div>
-        <div className="add-modal-body">
+        <form className="add-modal-body">
           <div className="new-review">
             <div>
               <div className="add-review-area">Review</div>
-              <span className="data-input">Summary  </span>
+              <span className="data-input">Summary</span>
               <input
                 type="text"
+                maxLength="60"
                 className="input-box"
                 placeholder="Example: Best Purchase Ever!"
+                value={summary}
+                onChange={(e) => setSummary(e.target.value)}
               />
-              <input
-                type="text"
+              <textarea
+                maxLength="1000"
                 className="input-review"
                 rows="5"
                 placeholder="Why did you like the product or not"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
               />
             </div>
             <div>
               <span className="data-input">Nickname:</span>
-              <input type="text" className="input-box" placeholder="Example: Jackson11!" />
+              <input
+                type="text"
+                maxLength="60"
+                className="input-box"
+                placeholder="Example: Jackson11!"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <div className="disclaimer-review">
+                For privacy reasons, do not use your full name or email address
+              </div>
             </div>
             <div>
               <span className="data-input">E-mail:</span>
-              <input type="email" className="input-box" placeholder="Example: Jackson11!@email.com" />
+              <input
+                type="email"
+                maxLength="60"
+                className="input-box"
+                placeholder="Example: Jackson11!@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <div className="disclaimer-review">
+                For authentication reasons, you will not be emailed
+              </div>
             </div>
             <div className="add-recommend">
-              <span className="data-input">Do you recommend this product?</span>
+              <span className="data-recommend">Do you recommend this product?</span>
               <span className="radio-recommend">
-                <input type="radio" name="recommend" value="yes" />Yes
-                <input type="radio" name="recommend" value="no" />No
+                <input
+                  type="radio"
+                  name="recommend"
+                  value="true"
+                  onClick={() => setRecommend(value)}
+                />
+                Yes
+                <input
+                  type="radio"
+                  name="recommend"
+                  value="false"
+                  onClick={() => setRecommend(value)}
+                />
+                No
               </span>
             </div>
           </div>
@@ -123,12 +195,18 @@ const AddModal = ({ metaData, closeClick }) => {
             <Characteristic />
             <span>upload photos</span>
           </div>
-        </div>
+        </form>
         <div className="add-modal-footer">
-          <button type="submit" className="submit-review-btn" onClick={onSubmitReview}>Submit</button>
+          <button
+            type="submit"
+            className="submit-review-btn"
+            onClick={onSubmitReview}
+          >
+            Submit
+          </button>
         </div>
       </div>
-     </div>
+    </div>
   );
 };
 

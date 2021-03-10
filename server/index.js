@@ -13,6 +13,33 @@ app.use(express.static(PUBLIC_DIR));
 app.use(express.json());
 
 const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
+            'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20113';
+
+// API request to get the product info
+app.get('/product/:params', (req, res) => {
+  const { params } = req.params;
+  console.log('on the server', params);
+  axios.get(`${url}products/${params}`, {
+    headers: { Authorization: TOKEN },
+  })
+    .then((data) => {
+      console.log(data.data);
+      res.send(data.data);
+    })
+    .catch((err) => console.log('error getting product info', err.response.data));
+});
+
+// API request to get the styles
+app.get('/styles/:params', (req, res) => {
+  const { params } = req.params;
+  axios.get(`${url}products/${params}/styles`, {
+    headers: { Authorization: TOKEN },
+  })
+    .then((data) => {
+      res.send(data.data);
+    })
+    .catch((err) => console.log('error getting styles', err.response.data));
+});
 
 // API request to get the reviews based on a different sort option
 app.get('/reviews/:params', (req, res) => {
@@ -22,6 +49,25 @@ app.get('/reviews/:params', (req, res) => {
   })
     .then((data) => res.send(data.data))
     .catch((err) => console.log('error getting reviews', err.response.data));
+});
+
+// API request to get the reviews meta data
+app.get('/reviews/meta/:params', (req, res) => {
+  const { params } = req.params;
+  axios.get(`${url}reviews/meta?product_${params}`, {
+    headers: { Authorization: TOKEN },
+  })
+    .then((data) => res.send(data.data))
+    .catch((err) => console.log('error getting reviews', err.response.data));
+});
+
+app.get('/questions/:params', (req, res) => {
+  const { params } = req.params;
+  axios.get(`${url}qa/questions/?product_${params}`, {
+    headers: { Authorization: TOKEN },
+  })
+    .then((data) => res.send(data.data))
+    .catch((err) => console.log('error getting questions', err.response.data));
 });
 
 // API request to increment the helpfulness counter
@@ -77,7 +123,7 @@ app.post('/api/qa/questions', (req, res) => {
 
 app.put('/api/qa/answers/:answerId/helpful', (req, res) => {
   const { answerId } = req.params;
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/answers/${answerId}/helpful`, 
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/qa/answers/${answerId}/helpful`,
     {
       body: { answer_id: req.body.id },
     },

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from './StarRating';
 import ImageModal from './imageModal';
@@ -50,10 +50,9 @@ const ReviewCard = ({ review, newList }) => {
   // reporting the review will remove it from the database
   function handleReportClick() {
     if (report === 'Report') {
-      axios.put('/reviews/report', {id: review.review_id})
+      axios.put('/reviews/report', { id: review.review_id })
         .then(() => {
           setReport('Reported');
-          newList();
         })
         .catch((err) => console.log('error in the post', err));
     }

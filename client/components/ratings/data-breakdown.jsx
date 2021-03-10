@@ -35,7 +35,7 @@ const Breakdown = ({ metaData, overallRating }) => {
 
   return (
     <div>
-      <h1 className="overall-rating">{overallRating}</h1>
+      <h1 className="overall-rating">{overallRating.toFixed(1)}</h1>
       <div>
         <span className="stars-rating">
           <StarRating number={overallRating} uniqNum={goodData.totalReviews} />

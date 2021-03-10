@@ -47,7 +47,7 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
 
   // check length of reviews section
   const DisplayReviews = () => {
-    let moreReviews = ((reviews.length - reviewNum === 1) ? 1 : 2);
+    const moreReviews = ((reviews.length - reviewNum === 1) ? 1 : 2);
     return (
       <div>
         {[...Array(reviewNum + moreReviews)].map((item, idx) => (
