@@ -4,13 +4,13 @@ import QuestionEntry from './QuestionEntry';
 import QuestionsAccordion from './QuestionsAccordion';
 import QuestionsModal from './QuestionsModal';
 
-const QuestionsList = (props) => {
-  const data = props.questions;
+const QuestionsList = ({questions, product}) => {
+  const data = questions;
   const [display, setDisplay] = useState(false);
   const [filtered, setFiltered] = useState([]);
   const [showQ, setShowQ] = useState(false);
   const restOfQuestions = data.slice(2, data.length);
-  const showProduct = props.product;
+  const showProduct = product;
 
   data.sort((a, b) => (
     b.question_helpfulness - a.question_helpfulness));

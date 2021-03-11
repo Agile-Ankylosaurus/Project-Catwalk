@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import AnswersList from './AnswersList';
 
-const AnswerModal = (props) => {
+const AnswerModal = ( {show, questionBody, onClose}) => {
   const [answerValue, setAnswerValue] = useState('');
   const [nickname, setNickname] = useState('');
   const [emailAnswer, setEmailAnswer] = useState('');
   const [file, setFile] = useState([]);
-  const showDisplay = props.show;
-  const prodName = props.productNameA;
-  // console.log(props);
+  const showDisplay = show;
 
   const handleAnswer = (e) => {
     setAnswerValue(e.target.value);
@@ -43,7 +40,7 @@ const AnswerModal = (props) => {
       alert('The email address provided is not in correct email format');
     }
 
-    axios.post(`/api/qa/questions/${props.questionBody.question_id}/answers`, {
+    axios.post(`/api/qa/questions/${questionBody.question_id}/answers`, {
       params: {
         body: answerValue,
         name: nickname,
@@ -68,7 +65,9 @@ const AnswerModal = (props) => {
       <div className="modal-a-content">
         <div className="modal-a-header">
           <h4 className="modal-a-title"> Submit Your Answer </h4>
-          <h4 className="modal-a-title"> {prodName} {props.questionBody.question_body} </h4>
+          <h4 className="modal-a-title">
+            {questionBody.question_body}
+          </h4>
         </div>
         <form className="modal-a-body">
           Your Answer *
@@ -96,7 +95,7 @@ const AnswerModal = (props) => {
           </div>
         </form>
         <div className="modal-a-footer">
-          <button type="button" onClick={props.onClose} className="close-a-btn">Close</button>
+          <button type="button" onClick={onClose} className="close-a-btn">Close</button>
         </div>
       </div>
     </div>

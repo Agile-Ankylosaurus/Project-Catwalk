@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-const QuestionsAccordion = (props) => {
+const QuestionsAccordion = ({contentQ}) => {
   const [activeQ, setActiveQ] = useState('');
   const [heightQ, setHeightQ] = useState('0px');
   const [title, setTitle] = useState(false);
@@ -33,7 +33,7 @@ const QuestionsAccordion = (props) => {
         <div
           className="accordion-q-text"
         >
-          {props.contentQ}
+          {contentQ}
         </div>
       </div>
     </div>

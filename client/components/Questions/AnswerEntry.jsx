@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AnswerEntry = (props) => {
+const AnswerEntry = ({answer}) => {
   // console.log('answerEntry: ', props);
-  const [count, setCount] = useState(props.answer.helpfulness);
+  const [count, setCount] = useState(answer.helpfulness);
   const [report, setReport] = useState('Report');
   const [disable, setDisable] = useState(false);
 
   const handleYesClick = () => {
     setCount(disable === false ? count + 1 : count);
     if (!disable) {
-      const answerId = props.answer.id;
-      props.answer.helpfulness += 1;
+      const answerId = answer.id;
+      answer.helpfulness += 1;
       axios.put(`/api/qa/answers/${answerId}/helpful`, { id: answerId })
         .then(() => setDisable(true))
         .catch((err) => console.log('error in put', err));
@@ -20,7 +20,7 @@ const AnswerEntry = (props) => {
 
   const handleReportClick = () => {
     setReport(report === 'Report' ? 'Reported' : 'Reported');
-    const answerId = props.answer.id;
+    const answerId = answer.id;
     if (report === 'Report') {
       axios.put(`/api/qa/answers/${answerId}/report`, { id: answerId })
         .then(() => setReport('Reported'))
@@ -39,7 +39,7 @@ const AnswerEntry = (props) => {
   };
 
   const Photos = () => {
-    const photoPresent = props.answer.photos;
+    const photoPresent = answer.photos;
     if (photoPresent.length >= 1) {
       return (
         photoPresent.map(
@@ -58,24 +58,24 @@ const AnswerEntry = (props) => {
           {' '}
         </span>
         <span className="answer-body">
-          {props.answer.body}
+          {answer.body}
         </span>
       </div>
       <span className="user-info">
         by
         {' '}
-        {props.answer.answerer_name}
+        {answer.answerer_name}
         ,
         {' '}
       </span>
       <span className="user-info-date">
-        {formattedDate(props.answer.date)}
+        {formattedDate(answer.date)}
         {' '}
       </span>
       <span className="user-info-helpful">
         | Helpful?
         {' '}
-        <span className="user-info-click" onClick={handleYesClick}>
+        <span className="user-info-click" onClick={handleYesClick} aria-hidden="true">
           Yes
           {' '}
         </span>
@@ -88,7 +88,7 @@ const AnswerEntry = (props) => {
         |
       </span>
       {' '}
-      <span className="user-info-click" onClick={handleReportClick}>
+      <span className="user-info-click" onClick={handleReportClick} aria-hidden="true">
         {report}
       </span>
       <div>

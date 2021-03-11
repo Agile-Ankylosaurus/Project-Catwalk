@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const QuestionsModal = (props) => {
+const QuestionsModal = ({productId, productName, onCloseQues, showQ}) => {
   const [questionsValue, setQuestionsValue] = useState('');
   const [nicknameQues, setNicknameQues] = useState('');
   const [emailQues, setEmailQues] = useState('');
-  // const [show, setShow] = useState(false);
-  const prodId = props.productId;
-  const prodName = props.productName;
+  const prodId = productId;
+  const prodName = productName;
 
-  if (!props.showQ) {
+  if (!showQ) {
     return null;
   }
 
@@ -85,7 +84,7 @@ const QuestionsModal = (props) => {
           <button type="button" onClick={handleQuestionSubmit}>Submit Your Question Here</button>
         </form>
         <div className="modal-q-footer">
-          <button type="button" onClick={props.onCloseQues} className="close-q-btn">Close</button>
+          <button type="button" onClick={onCloseQues} className="close-q-btn">Close</button>
         </div>
       </div>
     </div>

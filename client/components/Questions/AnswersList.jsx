@@ -2,8 +2,8 @@ import React from 'react';
 import AnswerEntry from './AnswerEntry';
 import AnswerAccordion from './AnswerAccordion';
 
-const AnswersList = (props) => {
-  const answerValues = Object.values(props.answer);
+const AnswersList = ({answer}) => {
+  const answerValues = Object.values(answer);
   const helpfulSort = answerValues.sort((a, b) => (b.helpfulness - a.helpfulness));
 
   const sellers = () => {
