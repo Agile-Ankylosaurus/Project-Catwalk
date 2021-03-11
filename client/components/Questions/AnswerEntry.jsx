@@ -9,7 +9,6 @@ const AnswerEntry = (props) => {
 
   const handleYesClick = () => {
     setCount(disable === false ? count + 1 : count);
-    // setDisable(true);
     if (!disable) {
       const answerId = props.answer.id;
       props.answer.helpfulness += 1;
@@ -39,14 +38,12 @@ const AnswerEntry = (props) => {
     return `${dateArr[1]} ${dateArr[0]}, ${dateArr[2]}`;
   };
 
-  // console.log(props.answer);
-  // console.log(props.answer.photos);
   const Photos = () => {
     const photoPresent = props.answer.photos;
     if (photoPresent.length >= 1) {
       return (
         photoPresent.map(
-          (photo, idx) => <img src={photo} key={idx} alt="" className="answer-img" />
+          (photo, idx) => <img src={photo} key={idx} alt="" className="answer-img" />,
         )
       );
     }
@@ -82,7 +79,7 @@ const AnswerEntry = (props) => {
           Yes
           {' '}
         </span>
-        <span className="user-info-click">
+        <span className="user-info-count">
           (
           {count}
           )

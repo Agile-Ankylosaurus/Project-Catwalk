@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import AnswersAccordion from './AnswerAccordion';
+import AnswersList from './AnswersList';
 
 const AnswerModal = (props) => {
   const [answerValue, setAnswerValue] = useState('');
@@ -8,7 +8,8 @@ const AnswerModal = (props) => {
   const [emailAnswer, setEmailAnswer] = useState('');
   const [file, setFile] = useState([]);
   const showDisplay = props.show;
-  const prodName = props.productName;
+  const prodName = props.productNameA;
+  // console.log(props);
 
   const handleAnswer = (e) => {
     setAnswerValue(e.target.value);

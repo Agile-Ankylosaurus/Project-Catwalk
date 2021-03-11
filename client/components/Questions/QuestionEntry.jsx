@@ -9,6 +9,7 @@ const QuestionEntry = (props) => {
   const [countOff, setCountOff] = useState(false);
   const [questionBody, setQuestionBody] = useState(props.question);
   const prodNameQues = props.product;
+  const [answers, setAnswers] = useState(props.question.answers);
 
   const handleCountClick = () => {
     setQuestionCount(countOff === false ? questionCount + 1 : questionCount);
@@ -53,14 +54,15 @@ const QuestionEntry = (props) => {
         <AnswerModal
           show={show}
           onClose={() => setShow(false)}
-          productName={prodNameQues}
+          productNameA={prodNameQues}
           questionBody={questionBody}
           className="ans-modal"
-          answer={props.question.answers}
+          answer={answers}
+          // setAnswer={setAnswers()}
         />
       </span>
       <div className="answer-list">
-        <AnswersList answer={props.question.answers} />
+        <AnswersList answer={answers} />
       </div>
     </div>
   );
