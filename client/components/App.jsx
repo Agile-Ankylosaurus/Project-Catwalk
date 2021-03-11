@@ -91,8 +91,7 @@ const App = () => {
     }
     if (direction === 'right') {
       arr[selectedStyle] = imgView === photoMax ? photoMax : updatedImgView + 1;
-      if (imgView )
-      setSelectedStyleImgMemory(arr);
+      if (imgView) setSelectedStyleImgMemory(arr);
       setImgView(imgView >= photoMax ? photoMax : imgView + 1);
     }
     if (direction === 'up') {
@@ -156,34 +155,20 @@ const App = () => {
     // console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(targetedProductUrl, {
-      headers: {
-        Authorization: TOKEN,
-      },
-      params: {
-        count: 1,
-      },
-    })
+    axios.get(`product/${newProductID}`)
       .then((productRes) => {
         setProduct(productRes.data);
         // get the styles data from the default product id
-        axios.get(`${targetedProductUrl}/styles`, {
-          headers: {
-            Authorization: TOKEN,
-          },
-        })
+        axios.get(`/styles/${newProductID}`)
           .then((styleRes) => {
             setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.results.length));
             setStyles(styleRes.data.results);
-            // console.log('product res', productRes.data);
             setProductId(productRes.data.id);
             setProductName(productRes.data.name);
             setStyles(styleRes.data.results);
-            // console.log('style res', styleRes.data.results)
             // get the reviews meta data from the default product id
             axios.get(`reviews/meta/id=${productRes.data.id}`)
               .then((ratingMeta) => {
-                // console.log(ratingMeta.data);
                 const metaData = ratingMeta.data;
                 const good = parseInt(metaData.recommended.true, 10) || 0;
                 const bad = parseInt(metaData.recommended.false, 10) || 0;

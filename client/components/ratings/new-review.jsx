@@ -1,47 +1,21 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import StarRating from './StarRating';
 
 const MEANINGS = require('./meanings');
 
 const AddModal = ({ metaData, closeClick }) => {
   const [newRating, setRating] = useState(0);
-  const [newQuals, setQuals] = useState([]);
   const [recommend, setRecommend] = useState(true);
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [photo, addPhoto] = useState([]);
   const [complete, setComplete] = useState(false);
-
-  const validateEmail = (email) => {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email.toLowerCase());
-  };
-  function onSubmitReview() {
-    // check for valid form
-    if (body.length < 50) {
-      alert('Your review is not descriptive enough.  Give us more details, please.')
-    } else if (newRating === 0) {
-      alert('You must enter a rating.');
-    } else if (name === '') {
-      alert('Please tell us your nickname.');
-    } else if (email === '' || !validateEmail(email)) {
-      alert('Please give us a correct e-mail address.');
-    } else if (!validCharacteristics()) {
-      alert('Please describe all the products characteristics');
-    } else if (!validPhotos) {
-      alert('There was a problem with one or more of your photos');
-    } else {
-      setComplete(true);
-    }
-    if(complete) {
-      console.log('we should submit this review');
-    }
-  }
+  const [newQuals, setQuals] = useState({});
+  // const [photo, addPhoto] = useState([]);
 
   const ShowRating = () => {
-    console.log(summary, body, name, email, recommend);
     if (newRating === 0) {
       return (
         <div>
@@ -61,7 +35,6 @@ const AddModal = ({ metaData, closeClick }) => {
 
   const Characteristic = () => {
     const qualities = Object.keys(metaData.characteristics);
-    console.log(qualities);
     return (
       <div>
         {qualities.map((quality) => (
@@ -110,6 +83,66 @@ const AddModal = ({ metaData, closeClick }) => {
       </div>
     );
   };
+
+  const validateEmail = (email) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
+  };
+
+  const getDummyQuals = (chars) => {
+    const qualities = Object.keys(chars);
+    const oldQuals = {};
+    for (let i = 0; i < qualities.length; i++) {
+      const id = chars[qualities[i]].id.toString();
+      oldQuals[id] = Math.round(chars[qualities[i]].value);
+    }
+    console.log(oldQuals);
+    setQuals(oldQuals);
+  };
+
+  function onSubmitReview() {
+    // check for valid form
+    if (body.length < 50) {
+      alert('Your review is not descriptive enough.  Give us more details, please.')
+    } else if (newRating === 0) {
+      alert('You must enter a rating.');
+    } else if (name === '') {
+      alert('Please tell us your nickname.');
+    } else if (email === '' || !validateEmail(email)) {
+      alert('Please give us a correct e-mail address.');
+    // } else if (!validCharacteristics()) {
+    //   alert('Please describe all the products characteristics');
+    // } else if (!validPhotos) {
+    //   alert('There was a problem with one or more of your photos');
+    } else {
+      setComplete(true);
+    }
+    getDummyQuals(metaData.characteristics);
+    if(complete) {
+      const prod = parseInt(metaData.product_id, 10);
+      const reviewObj = {
+        product_id: prod,
+        rating: newRating,
+        summary: summary,
+        body: body,
+        recommend: recommend,
+        name: name,
+        email: email,
+        photos: [],
+        characteristics: newQuals,
+      }
+      console.log(reviewObj);
+      console.log('we should submit this review');
+      axios.post('/newReview/', { reviewObj })
+        .then((response) => {
+          console.log('submit review success', response.data);
+        })
+        .catch((err) => {
+          console.log('error submitting review', err);
+        });
+      closeClick();
+    }
+  }
 
   return (
     <div className="add-modal">
