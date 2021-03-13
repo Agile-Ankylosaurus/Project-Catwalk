@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 // import reviews from '../Sample_data/SampleReviews';
 import ReviewCard from './review-card';
@@ -20,7 +20,7 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
         .then((resData) => setReviews(resData.data.results))
         .catch((err) => console.log('error in the post', err));
     }
-  }
+  };
 
   // resorting the reviews on the options click
   function handleSortChange(e) {
@@ -61,16 +61,25 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
     );
   };
 
+
   return (
     <div>
       <form className="review-head" onSubmit={handleSubmit}>
         <span>{reviews.length}</span>
-        <span className="review-head"> reviews, sorted by</span>
-        <select className="sort-options" onChange={handleSortChange} value={sortOrder}>
-          <option value="relevant">relevance</option>
-          <option value="helpful">helpfulness</option>
-          <option value="newest">newest</option>
-        </select>
+        <span className="review-head"> reviews, </span>
+        <label htmlFor="reviewSort">
+          sorted by
+          <select
+            id="reviewSort"
+            className="sort-options"
+            onChange={handleSortChange}
+            value={sortOrder}
+          >
+            <option value="relevant">relevance</option>
+            <option value="helpful">helpfulness</option>
+            <option value="newest">newest</option>
+          </select>
+        </label>
       </form>
       <div className="review-cards">
         { (reviews.length > 0) ? <DisplayReviews /> : null }

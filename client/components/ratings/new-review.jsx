@@ -45,32 +45,27 @@ const AddModal = ({ metaData, closeClick }) => {
                 <input
                   className="radio-char-btn"
                   type="radio"
-                  value="1"
-                  onClick={() => setQuals(value)}
+                  onClick={() => setQuals(1)}
                 />
                 <input
                   className="radio-char-btn"
                   type="radio"
-                  value="2"
-                  onClick={() => setQuals(value)}
+                  onClick={() => setQuals(2)}
                 />
                 <input
                   className="radio-char-btn"
                   type="radio"
-                  value="3"
-                  onClick={() => setQuals(value)}
+                  onClick={() => setQuals(3)}
                 />
                 <input
                   className="radio-char-btn"
                   type="radio"
-                  value="4"
-                  onClick={() => setQuals(value)}
+                  onClick={() => setQuals(4)}
                 />
                 <input
                   className="radio-char-btn"
                   type="radio"
-                  value="5"
-                  onClick={() => setQuals(value)}
+                  onClick={() => setQuals(5)}
                 />
               </span>
             </div>
@@ -84,7 +79,7 @@ const AddModal = ({ metaData, closeClick }) => {
     );
   };
 
-  const validateEmail = (email) => {
+  const validateEmail = () => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email.toLowerCase());
   };
@@ -96,7 +91,6 @@ const AddModal = ({ metaData, closeClick }) => {
       const id = chars[qualities[i]].id.toString();
       oldQuals[id] = Math.round(chars[qualities[i]].value);
     }
-    console.log(oldQuals);
     setQuals(oldQuals);
   };
 
@@ -118,21 +112,19 @@ const AddModal = ({ metaData, closeClick }) => {
       setComplete(true);
     }
     getDummyQuals(metaData.characteristics);
-    if(complete) {
+    if (complete) {
       const prod = parseInt(metaData.product_id, 10);
       const reviewObj = {
         product_id: prod,
         rating: newRating,
-        summary: summary,
-        body: body,
-        recommend: recommend,
-        name: name,
-        email: email,
+        summary,
+        body,
+        recommend,
+        name,
+        email,
         photos: [],
         characteristics: newQuals,
-      }
-      console.log(reviewObj);
-      console.log('we should submit this review');
+      };
       axios.post('/newReview/', { reviewObj })
         .then((response) => {
           console.log('submit review success', response.data);
@@ -208,15 +200,13 @@ const AddModal = ({ metaData, closeClick }) => {
                 <input
                   type="radio"
                   name="recommend"
-                  value="true"
-                  onClick={() => setRecommend(value)}
+                  onClick={() => setRecommend(true)}
                 />
                 Yes
                 <input
                   type="radio"
                   name="recommend"
-                  value="false"
-                  onClick={() => setRecommend(value)}
+                  onClick={() => setRecommend(false)}
                 />
                 No
               </span>

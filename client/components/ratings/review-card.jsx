@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import StarRating from './StarRating';
 import ImageModal from './imageModal';
@@ -41,7 +41,7 @@ const ReviewCard = ({ review, newList }) => {
   function handleYesClick() {
     if (!help) {
       review.helpfulness += 1;
-      axios.put('/reviews/help', {id: review.review_id})
+      axios.put('/reviews/help', { id: review.review_id })
         .then(() => setHelp(true))
         .catch((err) => console.log('error in the post', err));
     }
@@ -86,9 +86,23 @@ const ReviewCard = ({ review, newList }) => {
       <Response />
       <div className="review-help">
         <span className="normal">Helpful?  </span>
-        <span className="clickable" onClick={handleYesClick}>Yes ({review.helpfulness})</span>
+        <button
+          type="submit"
+          className="clickable"
+          onClick={handleYesClick}
+        >
+          Yes (
+          {review.helpfulness}
+          )
+        </button>
         <span className="normal">  |  </span>
-        <span className="clickable" onClick={handleReportClick}>{report}</span>
+        <button
+          type="submit"
+          className="clickable"
+          onClick={handleReportClick}
+        >
+          {report}
+        </button>
       </div>
     </div>
   );

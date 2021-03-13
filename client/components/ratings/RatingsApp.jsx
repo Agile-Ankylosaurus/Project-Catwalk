@@ -3,7 +3,7 @@ import Breakdown from './data-breakdown';
 import Reviews from './reviewSection';
 
 const RatingsApp = ({
-  metaData, reviews, setReviews, overallRating
+  metaData, reviews, setReviews, overallRating,
 }) => (
   <div className="ratings-module">
     <span className="ratings-title">Ratings &amp; Reviews</span>

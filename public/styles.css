@@ -26,7 +26,7 @@ body {
 }
 
 .logo {
-  color: orange;
+  color: darkgreen;
   font-size:48px;
   /* font-family:verdana; */
   font-family: 'Brush Script MT', cursive;
@@ -65,7 +65,6 @@ body {
   grid-template-columns: 1fr 4fr 1fr;
   grid-gap: 1em;
 }
-
 
 .gridFracOne {
   grid-column: 1fr;
@@ -767,12 +766,12 @@ body {
   padding: 1px;
   box-sizing: border-box;
   border: 1px solid #074b36;
-  border-radius: 2px;
+  margin-left: 5px;
 }
 .starbar-level {
   background: #074b36;
   width: 100%;
-  height:8px;
+  height: 8px;
 }
 .quality {
   display: inline;
@@ -793,12 +792,15 @@ body {
 .qualbar {
   background: #aaa;
   padding: 2px;
+  height: 4px;
   box-sizing: border-box;
   border: 1px solid #074b36;
+  border-radius: 4px;
+  margin-left: 5px;
 }
 .low-qual {
   font-size: 12px;
-  margin: 0;
+  margin-left: 5px;
   position: relative;
   top: -3px;
 }
@@ -900,6 +902,9 @@ body {
 }
 .review-help .clickable {
   text-decoration: underline;
+  border: none;
+  font-size: 12px;
+  background-color: #fff;
 }
 .clickable:hover {
   cursor: pointer;

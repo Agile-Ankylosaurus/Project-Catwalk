@@ -4,7 +4,6 @@ import QuestionsList from './Questions/QuestionsList';
 import ProductDetailsView from './productDetails/ProductDetailsView';
 import ProductDescription from './productDetails/ProductDescription';
 
-const TOKEN = require('../../config.js');
 const axios = require('axios');
 
 const App = () => {
@@ -50,7 +49,6 @@ const App = () => {
   const [thumbnailView, setThumbnailView] = useState(0);
   const [selectedStyleImgMemory, setSelectedStyleImgMemory] = useState([]);
   const [overallRating, setRating] = useState(0);
-  const [productId, setProductId] = useState('');
   const [productName, setProductName] = useState('');
   const [newProductID, setNewProductID] = useState('');
 
@@ -61,12 +59,6 @@ const App = () => {
       arr.push(0);
     }
     return arr;
-  };
-
-  const handleNewProduct = (e) => {
-    e.preventDefault();
-    console.log(newProductID);
-    getOneProduct(newProductID);
   };
 
   const handleImgThumbnailClick = (e) => {
@@ -99,15 +91,12 @@ const App = () => {
       if (imgView >= thumbnailView + 6) {
         setImgView(imgView - 1);
       }
-      console.log('up', thumbnailView);
     }
     if (direction === 'down') {
       setThumbnailView(updatedThumbnailView + 1);
       if (imgView <= thumbnailView) {
         setImgView(imgView + 1);
       }
-      console.log('down', thumbnailView);
-      console.log(parseInt(e.target.attributes[4].value, 10));
     }
   };
 
@@ -135,13 +124,10 @@ const App = () => {
     return weightedAvg;
   };
 
-  const getOneProduct = (newProductID) => {
+  const getOneProduct = (productID) => {
     // this url tests for 4+ styles and items on sale
-    const targetedProductUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
+    // const targetedProductUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products/20104';
     // const productURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/products';
-    console.log('getting product info', newProductID);
-    const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
-    const productLimit = 20;
     // const randomNumberGenerator = (max) => {
     //   let result = Math.floor(Math.random() * Math.floor(max) + 1);
     //   if (result < 10) {
@@ -155,19 +141,18 @@ const App = () => {
     // console.log(randomProductUrl);
 
     // get the default product to populate the page on start up
-    axios.get(`product/${newProductID}`)
+    axios.get(`product/${productID}`)
       .then((productRes) => {
         setProduct(productRes.data);
         // get the styles data from the default product id
-        axios.get(`/styles/${newProductID}`)
+        axios.get(`/styles/${productID}`)
           .then((styleRes) => {
             setSelectedStyleImgMemory(styleMemArrMaker(styleRes.data.results.length));
             setStyles(styleRes.data.results);
-            setProductId(productRes.data.id);
             setProductName(productRes.data.name);
             setStyles(styleRes.data.results);
             // get the reviews meta data from the default product id
-            axios.get(`reviews/meta/id=${productRes.data.id}`)
+            axios.get(`reviews/meta/id=${productID}`)
               .then((ratingMeta) => {
                 const metaData = ratingMeta.data;
                 const good = parseInt(metaData.recommended.true, 10) || 0;
@@ -176,11 +161,11 @@ const App = () => {
                 setMeta(metaData);
                 setRating(getOverallRating(metaData));
                 // get all reviews for the default product id
-                axios.get(`reviews/id=${productRes.data.id}&count=${totalReviews}`)
+                axios.get(`reviews/id=${productID}&count=${totalReviews}`)
                   .then((allReviews) => {
                     setReviews(allReviews.data.results);
                     // get questions for q&a
-                    axios.get(`/questions/id=${productRes.data.id}`)
+                    axios.get(`/questions/id=${productID}`)
                       .then((question) => {
                         setQuestions(question.data.results);
                       })
@@ -207,6 +192,11 @@ const App = () => {
 
   useState(() => getOneProduct(20103));
 
+  const handleNewProduct = (e) => {
+    e.preventDefault();
+    getOneProduct(newProductID);
+  };
+
   return (
     <div className="">
       <div className="gridContainer gridMainTemplate">
@@ -219,17 +209,25 @@ const App = () => {
           </div>
           <div className="flexAuto1">
             <div className="header-search">
-              <input
-                className="logo-search"
-                // placeholder="search..."
-                value={newProductID}
-                onChange={(e) => { setNewProductID(e.target.value); }}
-              />
-              <button type="submit" className="logo-search navSubmit" onClick={handleNewProduct}>Submit</button>
+              <label htmlFor="searchInput" style={{ color: '#fff' }}>
+                Product ID
+                <input
+                  id="searchInput"
+                  className="logo-search"
+                  placeholder="new product ID"
+                  value={newProductID}
+                  onChange={(e) => { setNewProductID(e.target.value); }}
+                />
+                <button
+                  type="submit"
+                  className="logo-search navSubmit"
+                  onClick={handleNewProduct}
+                >
+                  Submit
+                </button>
+              </label>
             </div>
           </div>
-
-
         </div>
         <div className="gridSpacer" />
         <div className="gridSpacer" />
