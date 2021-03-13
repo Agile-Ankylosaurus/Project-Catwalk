@@ -61,7 +61,6 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
     );
   };
 
-
   return (
     <div>
       <form className="review-head" onSubmit={handleSubmit}>
@@ -96,7 +95,16 @@ const Reviews = ({ reviews, metaData, setReviews }) => {
         )
         : null}
       <button type="submit" className="big-review-btn" onClick={handleAddClick}>Add A Review +</button>
-      {openAdd ? <AddModal metaData={metaData} closeClick={handleAddClick} /> : null}
+      {openAdd
+        ? (
+          <AddModal
+            metaData={metaData}
+            closeClick={handleAddClick}
+            newList={newList}
+          />
+        )
+        : null
+      }
     </div>
   );
 };

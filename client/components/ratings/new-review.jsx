@@ -4,14 +4,13 @@ import StarRating from './StarRating';
 
 const MEANINGS = require('./meanings');
 
-const AddModal = ({ metaData, closeClick }) => {
+const AddModal = ({ metaData, closeClick, newList }) => {
   const [newRating, setRating] = useState(0);
   const [recommend, setRecommend] = useState(true);
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [complete, setComplete] = useState(false);
   const [newQuals, setQuals] = useState({});
   // const [photo, addPhoto] = useState([]);
 
@@ -87,7 +86,7 @@ const AddModal = ({ metaData, closeClick }) => {
   const getDummyQuals = (chars) => {
     const qualities = Object.keys(chars);
     const oldQuals = {};
-    for (let i = 0; i < qualities.length; i++) {
+    for (let i = 0; i < qualities.length; i += 1) {
       const id = chars[qualities[i]].id.toString();
       oldQuals[id] = Math.round(chars[qualities[i]].value);
     }
@@ -109,10 +108,7 @@ const AddModal = ({ metaData, closeClick }) => {
     // } else if (!validPhotos) {
     //   alert('There was a problem with one or more of your photos');
     } else {
-      setComplete(true);
-    }
-    getDummyQuals(metaData.characteristics);
-    if (complete) {
+      getDummyQuals(metaData.characteristics);
       const prod = parseInt(metaData.product_id, 10);
       const reviewObj = {
         product_id: prod,
@@ -127,7 +123,7 @@ const AddModal = ({ metaData, closeClick }) => {
       };
       axios.post('/newReview/', { reviewObj })
         .then((response) => {
-          console.log('submit review success', response.data);
+          newList();
         })
         .catch((err) => {
           console.log('error submitting review', err);

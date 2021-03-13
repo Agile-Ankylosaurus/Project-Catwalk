@@ -42,7 +42,10 @@ const ReviewCard = ({ review, newList }) => {
     if (!help) {
       review.helpfulness += 1;
       axios.put('/reviews/help', { id: review.review_id })
-        .then(() => setHelp(true))
+        .then(() => {
+          setHelp(true);
+          newList();
+        })
         .catch((err) => console.log('error in the post', err));
     }
   }
@@ -53,6 +56,7 @@ const ReviewCard = ({ review, newList }) => {
       axios.put('/reviews/report', { id: review.review_id })
         .then(() => {
           setReport('Reported');
+          newList();
         })
         .catch((err) => console.log('error in the post', err));
     }
