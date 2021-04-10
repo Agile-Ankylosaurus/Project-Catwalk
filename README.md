@@ -1,12 +1,12 @@
 # Project-Catwalk
-Front End Capstone
+Front End Project
 
 Project Catwalk is the web portal for a retail apparel store.  This website provides a fully interactive user experience for clothes shopping by providing clothing images, reviews, and customer feedback options for the online shopper.
 
 Built with:
 * [React (Hooks)](https://reactjs.org/)
 * [Express](https://expressjs.com/)
-* [HTML]
+* HTML
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 * [Axios](https://www.npmjs.com/package/axios)
 
