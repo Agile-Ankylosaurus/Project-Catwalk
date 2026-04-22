@@ -39,3 +39,8 @@ To run webpack in production mode<br>
 
 To run tests<br>
 `npm test`
+
+<img width="1210" height="825" alt="image" src="https://github.com/user-attachments/assets/b9a968c0-7ff8-4528-aa60-eda425dd500c" />
+
+<img width="1645" height="733" alt="image" src="https://github.com/user-attachments/assets/c1a648a2-4938-4983-945a-922588a2c102" />
+
